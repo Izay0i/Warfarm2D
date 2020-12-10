@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/global/Actor.gd"
 }, {
 "base": "Node",
+"class": "GrineerFSM",
+"language": "GDScript",
+"path": "res://assets/scripts/npc/GrineerStateMachine.gd"
+}, {
+"base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://assets/scripts/global/StateMachine.gd"
 } ]
 _global_script_class_icons={
 "Actor": "",
+"GrineerFSM": "",
 "StateMachine": ""
 }
 
