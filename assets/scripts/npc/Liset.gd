@@ -23,7 +23,8 @@ func _move_up(delta):
 
 func _spawn_player():
 	player = EXCALIBUR_SCENE.instance()
-	player.position = get_node(".").global_position
+	player.position.x = get_node(".").global_position.x
+	player.position.y = get_node(".").global_position.y + 50
 	get_parent().add_child(player)
 	print(get_parent().name)
 

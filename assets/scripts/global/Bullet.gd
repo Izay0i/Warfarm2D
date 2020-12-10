@@ -5,6 +5,7 @@ const BULLET_SPEED = 200
 onready var timer = $Timer
 onready var sprite = $Sprite
 
+var tag
 var velocity = Vector2.ZERO
 var direction = 1
 

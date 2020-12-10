@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 export var move_speed = 200
+export var health = 500
+export var shield = 300
 
 signal grounded_updated(is_grounded)
 
@@ -51,6 +53,10 @@ func _shoot_bullet(direction):
 
 func _teleport(pos):
 	get_parent().get_node("Excalibur").global_position = pos
+
+#shield and health
+func _handle_status():
+	pass
 
 func _handle_direction():
 	#player

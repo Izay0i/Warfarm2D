@@ -3,7 +3,6 @@ extends Node
 class_name GrineerFSM
 
 onready var parent = get_parent()
-onready var timer = get_parent().timer
 
 enum {
 	IDLE,
@@ -22,18 +21,18 @@ func _animate():
 		SHOOT:
 			parent.animated_sprite.play("shoot")
 
-func _physics_process(delta):
-	if parent.timer.is_stopped():
-		parent.timer.reset_timer()
-
+func _physics_process(_delta):
 	match state:
 		IDLE:
 			if parent.velocity.x != 0:
 				state = RUN
+			elif parent.get("is_enemy_spotted"):
+				state = SHOOT
 		RUN:
-			if !parent.timer.is_stopped():
+			if parent.velocity.x == 0:
 				state = IDLE
 		SHOOT:
-			pass
+			if !parent.get("is_enemy_spotted"):
+				state = IDLE
 
 	_animate()
