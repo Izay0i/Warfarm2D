@@ -31,7 +31,6 @@ tile_data = PoolIntArray( -524259, 5, 0, -524258, 8, 0, -524257, 8, 0, -524256, 
 [node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
-autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2( 1, 0 )

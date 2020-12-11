@@ -7,7 +7,7 @@ const DUMMY_SCENE = preload("res://assets/scenes/npc/TargetDummy.tscn")
 #NPC spawns
 #onready var spawn_positions : PoolVector2Array = [ 
 #
-#]
+#
 #
 #func _spawn_enemies():
 #	for pos in spawn_positions:
@@ -20,3 +20,7 @@ const DUMMY_SCENE = preload("res://assets/scenes/npc/TargetDummy.tscn")
 #
 #func _ready():
 #	call_deferred("_spawn_enemies")
+
+func _process(_delta):
+	if Input.is_action_pressed("exit"):
+		get_tree().quit()

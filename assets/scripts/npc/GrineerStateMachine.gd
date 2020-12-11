@@ -7,7 +7,8 @@ onready var parent = get_parent()
 enum {
 	IDLE,
 	RUN,
-	SHOOT
+	SHOOT,
+	DIE
 }
 
 var state = IDLE
@@ -20,6 +21,8 @@ func _animate():
 			parent.animated_sprite.play("run")
 		SHOOT:
 			parent.animated_sprite.play("shoot")
+		DIE:
+			parent.animated_sprite.play("die")
 
 func _physics_process(_delta):
 	match state:
@@ -28,11 +31,17 @@ func _physics_process(_delta):
 				state = RUN
 			elif parent.get("is_enemy_spotted"):
 				state = SHOOT
+			elif parent.health <= 0:
+				state = DIE
 		RUN:
 			if parent.velocity.x == 0:
 				state = IDLE
+			elif parent.health <= 0:
+				state = DIE
 		SHOOT:
 			if !parent.get("is_enemy_spotted"):
 				state = IDLE
+			elif parent.health <= 0:
+				state = DIE
 
 	_animate()

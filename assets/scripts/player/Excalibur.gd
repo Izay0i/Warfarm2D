@@ -21,7 +21,7 @@ onready var bullet_position = $Position2D
 onready var timer = $Timer
 onready var raycast = $RayCast2D
 onready var camera = $Camera2D
-onready var player_sfx = $SFX
+onready var sword_sfx = $SwordSFX
 
 var gravity
 var max_jump_velocity
@@ -37,6 +37,8 @@ var is_special_move = false
 var is_facing_right = true
 var is_grounded
 
+var sound_has_played = true
+
 var max_jump_height = 3 * Global.UNIT_SIZE
 var min_jump_height = 1.2 * Global.UNIT_SIZE
 var jump_duration = 0.38
@@ -47,6 +49,7 @@ func _reset_timer():
 
 func _shoot_bullet(direction):
 	var bullet = BULLET_SCENE.instance()
+	bullet.set_tag("PLAYER")
 	get_parent().add_child(bullet)
 	bullet.global_position = bullet_position.global_position	
 	bullet.set_bullet_direction(direction)
@@ -157,6 +160,11 @@ func _physics_process(delta):
 	if was_grounded == null || is_grounded != was_grounded:
 		emit_signal("grounded_updated", is_grounded)
 
+	if Input.is_action_pressed("melee"):
+		if sound_has_played:
+			sound_has_played = false
+			sword_sfx.play()
+
 #	if get_parent().get_node("Excalibur").global_position.y > FALL_LIMIT:
 #		_teleport(Vector2(3840, 384))
 
@@ -172,6 +180,12 @@ func _on_Timer_timeout():
 func _on_Area2D_area_entered(area):
 	if area.name == "FallArea1":
 		_teleport(Vector2(1728, 288))
-	
+
 	if area.name == "FallArea2":
 		_teleport(Vector2(3840, 384))
+
+	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
+		print("Grineer's bullet")
+
+func _on_SwordSFX_finished():
+	sound_has_played = true

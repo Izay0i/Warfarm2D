@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sword_hit.ogg-3b914077e3e86345e3e023b381a738ab.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/player/weapons/sword_hit.ogg"
+dest_files=[ "res://.import/sword_hit.ogg-3b914077e3e86345e3e023b381a738ab.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
