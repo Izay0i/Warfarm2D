@@ -31,6 +31,7 @@ tile_data = PoolIntArray( -524259, 5, 0, -524258, 8, 0, -524257, 8, 0, -524256, 
 [node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
+autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2( 1, 0 )
@@ -152,16 +153,8 @@ collision_mask = 2147483649
 position = Vector2( 3088, 432 )
 collision_mask = 2147483649
 
-[node name="GrineerLancer10" parent="." instance=ExtResource( 11 )]
-position = Vector2( 2960, 464 )
-collision_mask = 2147483649
-
 [node name="GrineerLancer11" parent="." instance=ExtResource( 11 )]
 position = Vector2( 2872, 464 )
-collision_mask = 2147483649
-
-[node name="GrineerLancer12" parent="." instance=ExtResource( 11 )]
-position = Vector2( 2912, 464 )
 collision_mask = 2147483649
 
 [node name="GrineerLancer13" parent="." instance=ExtResource( 11 )]

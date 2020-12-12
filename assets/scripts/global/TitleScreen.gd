@@ -7,7 +7,7 @@ onready var exit_button = $MarginContainer/VBoxContainer/VBoxContainer/ExitButto
 func _ready():
 	start_button.grab_focus()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if start_button.is_hovered():
 		start_button.grab_focus()
 
@@ -15,7 +15,8 @@ func _physics_process(delta):
 		exit_button.grab_focus()
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://assets/scenes/levels/earth/StageOne.tscn")
+	if get_tree().change_scene("res://assets/scenes/levels/earth/StageOne.tscn") != OK:
+		print("Failed to change to stage one")
 
 func _on_ExitButton_pressed():
 	get_tree().quit()

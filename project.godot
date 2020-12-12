@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/global/Bullet.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "GrineerBombard",
+"language": "GDScript",
+"path": "res://assets/scripts/npc/GrineerBombard.gd"
+}, {
 "base": "Node",
 "class": "GrineerFSM",
 "language": "GDScript",
 "path": "res://assets/scripts/npc/GrineerStateMachine.gd"
+}, {
+"base": "Area2D",
+"class": "HomingMissile",
+"language": "GDScript",
+"path": "res://assets/scripts/global/HomingMissile.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
@@ -32,7 +42,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Actor": "",
 "Bullet": "",
+"GrineerBombard": "",
 "GrineerFSM": "",
+"HomingMissile": "",
 "StateMachine": ""
 }
 

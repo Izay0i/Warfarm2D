@@ -33,14 +33,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 		get_parent().add_child(timer)
 	timer.start()
 
-#static body detection
 func _on_Bullet_body_entered(body):
 	if (body.name == "Excalibur" && tag == "LANCER") || tag == "PLAYER":
+		$SFX.stop()
 		queue_free()
 
-	#print("Hit the " + body.get_name())	
-	#print(body.global_position)
-
 func _on_Timer_timeout():
-	print("Bullet exited the screen after 5s")
+	$SFX.stop()
 	queue_free()

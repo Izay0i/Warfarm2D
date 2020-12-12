@@ -57,9 +57,19 @@ func _shoot_bullet(direction):
 func _teleport(pos):
 	get_parent().get_node("Excalibur").global_position = pos
 
+func _take_damage(damage):
+	if shield > 0:
+		shield -= damage
+	else:
+		health -= damage
+
 #shield and health
 func _handle_status():
-	pass
+	if shield < 0:
+		shield = 0
+
+	if health < 0:
+		health = 0
 
 func _handle_direction():
 	#player
@@ -150,6 +160,8 @@ func _ready():
 	_reset_timer()
 
 func _physics_process(delta):
+	_handle_status()
+
 	_get_input()
 	_apply_gravity(delta)
 	_apply_movement()
@@ -171,8 +183,8 @@ func _physics_process(delta):
 func _on_AnimatedSprite_animation_finished():
 	is_special_move = false
 
-func _on_SwordHit_body_entered(body):
-	print("Hit the " + body.get_name())
+func _on_SwordHit_body_entered(_body):
+	pass
 
 func _on_Timer_timeout():
 	timer.one_shot = false
@@ -184,8 +196,11 @@ func _on_Area2D_area_entered(area):
 	if area.name == "FallArea2":
 		_teleport(Vector2(3840, 384))
 
+	if area.get_class() == "HomingMissile":
+		_take_damage(0)
+
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
-		print("Grineer's bullet")
+		_take_damage(0)
 
 func _on_SwordSFX_finished():
 	sound_has_played = true
