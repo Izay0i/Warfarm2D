@@ -31,6 +31,9 @@ func _animate():
 		MELEE:
 			if parent.is_special_move:
 				parent.animation_player.play("melee")
+				if parent.sound_has_played:
+					parent.sound_has_played = false
+					parent.sword_sfx.play()
 
 func _physics_process(_delta):
 	match state:

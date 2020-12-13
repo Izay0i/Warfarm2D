@@ -28,9 +28,9 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 78.0
 margin_right = 1202.0
-margin_bottom = 720.0
+margin_bottom = 747.0
 size_flags_horizontal = 4
-custom_constants/separation = 32
+custom_constants/separation = -50
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 margin_right = 1124.0
@@ -38,22 +38,22 @@ margin_bottom = 537.0
 texture = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_left = 530.0
-margin_top = 569.0
-margin_right = 594.0
-margin_bottom = 701.0
+margin_left = 498.0
+margin_top = 487.0
+margin_right = 626.0
+margin_bottom = 747.0
 size_flags_horizontal = 4
 
 [node name="StartButton" type="TextureButton" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
+margin_right = 128.0
+margin_bottom = 128.0
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 7 )
 
 [node name="ExitButton" type="TextureButton" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 68.0
-margin_right = 64.0
-margin_bottom = 132.0
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 260.0
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 6 )
 

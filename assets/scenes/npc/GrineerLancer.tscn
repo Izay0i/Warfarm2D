@@ -61,7 +61,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 56, 16 )
+extents = Vector2( 48, 16 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 16 )
@@ -92,7 +92,7 @@ script = ExtResource( 3 )
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2( -43, -8 )
+position = Vector2( -40, -8 )
 shape = SubResource( 10 )
 
 [node name="Position2D" type="Position2D" parent="."]
@@ -116,8 +116,14 @@ one_shot = true
 [node name="HealthDisplay" parent="." instance=ExtResource( 4 )]
 position = Vector2( -6, -32 )
 scale = Vector2( 0.1, 0.1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 1.8, 2.38419e-07 )
+scale = Vector2( 1.18, 1.6 )
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_DetectionArea_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_DetectionArea_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

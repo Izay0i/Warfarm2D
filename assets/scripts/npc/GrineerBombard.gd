@@ -17,11 +17,14 @@ onready var health_display = $HealthDisplay
 const GRAVITY = 10
 const SPEED = 100
 
+var rng = RandomNumberGenerator.new()
+
 var target = null
 var health = 500
 var velocity = Vector2.ZERO
 var normal = -1
 var is_enemy_spotted = false
+var active = false
 
 func get_class():
 	return "GrineerBombard"
@@ -91,11 +94,12 @@ func _ready():
 	_start_timer()
 
 func _physics_process(_delta):
-	if !target:
-		_find_target()
-	
-	_handle_status()
-	_handle_movement()
+	if active:
+		if !target:
+			_find_target()
+		
+		_handle_status()
+		_handle_movement()
 
 func _on_DetectionArea_body_entered(body):
 	if body.name == "Excalibur":
@@ -112,14 +116,22 @@ func _on_Timer_timeout():
 	timer.one_shot = false
 
 func _on_CollisionArea_area_entered(area):
-	if area.get_class() == "Bullet" && area.get_tag() == "PLAYER":
-		_take_damage(20)
-		print(health)
+	if active:
+		rng.randomize()
+		if area.get_class() == "Bullet" && area.get_tag() == "PLAYER":
+			_take_damage(20 + rng.randi_range(-5, 5))
+			print(health)
 
-	if area.name == "SwordHit":
-		_take_damage(35)
-		print(health)
+		if area.name == "SwordHit":
+			_take_damage(35 + rng.randi_range(-6, 5))
+			print(health)
 
 func _on_DeathTimer_timeout():
 	queue_free()
 	print("Grineer died")
+
+func _on_VisibilityNotifier2D_screen_entered():
+	active = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	active = false

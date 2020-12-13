@@ -107,9 +107,10 @@ stream = ExtResource( 5 )
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( -7.456, 0.017539 )
 rotation = -3.14159
-amount = 20
+amount = 50
 speed_scale = 1.5
 randomness = 0.2
+local_coords = false
 process_material = SubResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 export var move_speed = 200
-export var health = 500
-export var shield = 300
+export var health = 300
+export var shield = 200
 
 signal grounded_updated(is_grounded)
 
@@ -22,10 +22,13 @@ onready var timer = $Timer
 onready var raycast = $RayCast2D
 onready var camera = $Camera2D
 onready var sword_sfx = $SwordSFX
+onready var player_health = $PlayerHealth
 
 var gravity
 var max_jump_velocity
 var min_jump_velocity
+
+var rng = RandomNumberGenerator.new()
 
 var move_direction = 0
 var velocity = Vector2.ZERO
@@ -63,13 +66,19 @@ func _take_damage(damage):
 	else:
 		health -= damage
 
+	print("Shield: %d Health: %d" % [shield, health])
+
 #shield and health
 func _handle_status():
+	player_health.update_status(shield, health)
+
 	if shield < 0:
 		shield = 0
 
 	if health < 0:
 		health = 0
+		if get_tree().reload_current_scene() != OK:
+			print("Failed to reload current scene")
 
 func _handle_direction():
 	#player
@@ -165,17 +174,12 @@ func _physics_process(delta):
 	_get_input()
 	_apply_gravity(delta)
 	_apply_movement()
-	
+
 	var was_grounded = is_grounded
 	is_grounded = is_on_floor()
-	
+
 	if was_grounded == null || is_grounded != was_grounded:
 		emit_signal("grounded_updated", is_grounded)
-
-	if Input.is_action_pressed("melee"):
-		if sound_has_played:
-			sound_has_played = false
-			sword_sfx.play()
 
 #	if get_parent().get_node("Excalibur").global_position.y > FALL_LIMIT:
 #		_teleport(Vector2(3840, 384))
@@ -202,11 +206,12 @@ func _on_Area2D_area_entered(area):
 	if area.name == "FallArea4":
 		_teleport(Vector2(9152, 360))
 
+	rng.randomize()
 	if area.get_class() == "HomingMissile":
-		_take_damage(0)
+		_take_damage(50 + rng.randi_range(-7, 10))
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
-		_take_damage(0)
+		_take_damage(25 + rng.randi_range(-3, 2))
 
 func _on_SwordSFX_finished():
 	sound_has_played = true

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/start_game_selected.png-5f25ea403a195017db941e9b65b23c8d.stex"
+path="res://.import/barHorizontal_cyan.png-2c9513f57fbead2a150f1505d54a472a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/miscs/start_game_selected.png"
-dest_files=[ "res://.import/start_game_selected.png-5f25ea403a195017db941e9b65b23c8d.stex" ]
+source_file="res://assets/textures/miscs/health/barHorizontal_cyan.png"
+dest_files=[ "res://.import/barHorizontal_cyan.png-2c9513f57fbead2a150f1505d54a472a.stex" ]
 
 [params]
 
