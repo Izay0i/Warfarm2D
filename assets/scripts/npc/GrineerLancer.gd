@@ -9,6 +9,7 @@ onready var detection_area = $DetectionArea
 onready var timer = $Timer
 onready var death_timer = $DeathTimer
 onready var collision_shape = $CollisionShape2D
+onready var health_display = $HealthDisplay
 
 const GRAVITY = 10
 const SPEED = 100
@@ -34,6 +35,7 @@ func _shoot_bullet(direction):
 
 func _take_damage(damage):
 	health -= damage
+	health_display.update_healthbar(health)
 
 func _handle_status():
 	if health <= 0:

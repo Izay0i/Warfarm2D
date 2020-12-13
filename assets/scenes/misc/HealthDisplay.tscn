@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/textures/miscs/health/barHorizontal_green.png" type="Texture" id=1]
+[ext_resource path="res://assets/scripts/global/HealthDisplay.gd" type="Script" id=2]
+
+[node name="HealthDisplay" type="Node2D"]
+position = Vector2( -96, -88 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = -4.0
+margin_right = 196.0
+margin_bottom = 26.0
+value = 100.0
+texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -132,7 +132,7 @@ func _handle_shooting():
 func _get_input():
 	if DEBUG:
 		if Input.is_action_pressed("debug"):
-			_teleport(Vector2(3840, 384))
+			_teleport(Vector2(5248, 64))
 
 #	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 #	if !is_on_floor() || raycast.is_colliding():
@@ -195,6 +195,12 @@ func _on_Area2D_area_entered(area):
 
 	if area.name == "FallArea2":
 		_teleport(Vector2(3840, 384))
+
+	if area.name == "FallArea3":
+		_teleport(Vector2(5952, 296))
+
+	if area.name == "FallArea4":
+		_teleport(Vector2(9152, 360))
 
 	if area.get_class() == "HomingMissile":
 		_take_damage(0)

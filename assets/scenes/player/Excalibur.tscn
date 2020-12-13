@@ -347,11 +347,11 @@ shape = SubResource( 30 )
 disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2( 0.42, 0.42 )
+zoom = Vector2( 0.55, 0.55 )
 limit_left = 0
 limit_top = -136
-limit_right = 5024
-limit_bottom = 512
+limit_right = 10176
+limit_bottom = 736
 limit_smoothed = true
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
