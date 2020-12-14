@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Target-down_-assassination-contract-complete.-Great-work-Tenno..ogg-959463419a577838c48cb3b11957e7b3.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/voicelines/Target-down_-assassination-contract-complete.-Great-work-Tenno..ogg"
+dest_files=[ "res://.import/Target-down_-assassination-contract-complete.-Great-work-Tenno..ogg-959463419a577838c48cb3b11957e7b3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

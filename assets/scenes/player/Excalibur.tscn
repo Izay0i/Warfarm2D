@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/textures/player/excalibur/atlas/excalibur_atlas.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/player/Excalibur.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/scripts/player/PlayerCamera2D.gd" type="Script" id=4]
 [ext_resource path="res://assets/sounds/player/weapons/sword_hit.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/scenes/player/PlayerHealth.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sounds/player/ouchie_ouch.ogg" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -392,9 +393,12 @@ shape = SubResource( 31 )
 [node name="PlayerHealth" parent="." instance=ExtResource( 6 )]
 position = Vector2( -30, -32 )
 scale = Vector2( 0.3, 0.3 )
+
+[node name="HurtSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Excalibur_grounded_updated"]
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
-[connection signal="body_entered" from="AnimatedSprite/SwordHit" to="." method="_on_SwordHit_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="finished" from="SwordSFX" to="." method="_on_SwordSFX_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

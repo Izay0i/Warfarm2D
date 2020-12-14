@@ -21,5 +21,3 @@ func _ready():
 
 func _process(_delta):
 	global_rotation = 0
-	if shield.value <= 0:
-		shield_text.percent_visible = 0

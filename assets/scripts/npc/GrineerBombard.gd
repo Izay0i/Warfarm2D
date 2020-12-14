@@ -119,16 +119,15 @@ func _on_CollisionArea_area_entered(area):
 	if active:
 		rng.randomize()
 		if area.get_class() == "Bullet" && area.get_tag() == "PLAYER":
-			_take_damage(20 + rng.randi_range(-5, 5))
+			_take_damage(10 + rng.randi_range(-5, 5))
 			print(health)
 
 		if area.name == "SwordHit":
-			_take_damage(35 + rng.randi_range(-6, 5))
+			_take_damage(25 + rng.randi_range(-6, 5))
 			print(health)
 
 func _on_DeathTimer_timeout():
 	queue_free()
-	print("Grineer died")
 
 func _on_VisibilityNotifier2D_screen_entered():
 	active = true

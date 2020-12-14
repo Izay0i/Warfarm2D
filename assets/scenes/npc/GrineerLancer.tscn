@@ -61,7 +61,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 48, 16 )
+extents = Vector2( 48, 14 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 16 )
@@ -92,7 +92,7 @@ script = ExtResource( 3 )
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2( -40, -8 )
+position = Vector2( -40, 0 )
 shape = SubResource( 10 )
 
 [node name="Position2D" type="Position2D" parent="."]

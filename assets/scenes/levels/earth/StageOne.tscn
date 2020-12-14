@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scenes/misc/GrineerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/tileset/EarthTile.tscn" type="PackedScene" id=2]
@@ -10,7 +10,12 @@
 [ext_resource path="res://assets/textures/tileset/parallax_background/earth/plx-3.png" type="Texture" id=8]
 [ext_resource path="res://assets/textures/tileset/parallax_background/earth/plx-4.png" type="Texture" id=9]
 [ext_resource path="res://assets/scripts/levels/earth/StageOne.gd" type="Script" id=10]
+[ext_resource path="res://assets/textures/player/sword_ui.png" type="Texture" id=11]
 [ext_resource path="res://assets/scenes/misc/PauseScreen.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/textures/player/gun_ui.png" type="Texture" id=13]
+[ext_resource path="res://assets/textures/npc/lowtus.png" type="Texture" id=14]
+[ext_resource path="res://assets/sounds/voicelines/There-is-a-large-platoon-of-Grineer-Marines-stationed-here.-Leave-no-one-standing..ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/voicelines/All-targets-eliminated.-Let_s-get-out-of-here..ogg" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 188, 40 )
@@ -21,7 +26,25 @@ extents = Vector2( 200, 100 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 184, 48 )
 
-[node name="StageOne" type="Node"]
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 14 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+} ]
+
+[node name="StageOne" type="Node" groups=[
+"enemies",
+]]
 script = ExtResource( 10 )
 
 [node name="GrineerShip" parent="." instance=ExtResource( 1 )]
@@ -37,6 +60,7 @@ tile_data = PoolIntArray( -524259, 5, 0, -524258, 8, 0, -524257, 8, 0, -524256, 
 [node name="BackgroundAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -15.0
+autoplay = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scale = Vector2( 2, 2 )
@@ -138,5 +162,64 @@ shape = SubResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="SwordUI" type="TextureRect" parent="CanvasLayer"]
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 144.0
+margin_bottom = 72.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunUI" type="TextureRect" parent="CanvasLayer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = ExtResource( 13 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lowtus" type="Node2D" parent="CanvasLayer"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LowtusUI" type="AnimatedSprite" parent="CanvasLayer/Lowtus"]
+visible = false
+position = Vector2( 56, 220 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 6 )
+playing = true
+
+[node name="DialogTimer" type="Timer" parent="CanvasLayer/Lowtus"]
+process_mode = 0
+wait_time = 5.0
+one_shot = true
+
+[node name="Intro" type="AudioStreamPlayer" parent="CanvasLayer/Lowtus"]
+stream = ExtResource( 15 )
+
+[node name="Ending" type="AudioStreamPlayer" parent="CanvasLayer/Lowtus"]
+stream = ExtResource( 16 )
+
+[node name="ObjectiveLabel" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 160.0
+margin_top = 16.0
+margin_right = 368.0
+margin_bottom = 48.0
+text = "
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource( 12 )]
 visible = false
+[connection signal="finished" from="CanvasLayer/Lowtus/Intro" to="." method="_on_Intro_finished"]
+[connection signal="finished" from="CanvasLayer/Lowtus/Ending" to="." method="_on_Ending_finished"]

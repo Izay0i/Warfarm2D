@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/textures/npc/grineer/grineer_ship_idle.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/npc/grineer/grineer_ship.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/npc/GrineerShip.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -42,6 +43,8 @@ height = 10.0
 
 [node name="GrineerShip" type="KinematicBody2D"]
 scale = Vector2( 4, 4 )
+collision_layer = 4
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }

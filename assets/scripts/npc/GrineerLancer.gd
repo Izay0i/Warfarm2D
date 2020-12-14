@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name GrineerLancer
+
 const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
 
 onready var animated_sprite = $AnimatedSprite
@@ -21,6 +23,9 @@ var velocity = Vector2.ZERO
 var normal = -1
 var is_enemy_spotted = false
 var active = false
+
+func get_class():
+	return "GrineerLancer"
 
 func _start_timer():
 	timer.one_shot = true
@@ -97,11 +102,11 @@ func _on_CollisionArea_area_entered(area):
 	if active:
 		rng.randomize()
 		if area.get_class() == "Bullet" && area.get_tag() == "PLAYER":
-			_take_damage(30 + rng.randi_range(-3, 5))
+			_take_damage(20 + rng.randi_range(-3, 5))
 			print(health)
 
 		if area.name == "SwordHit":
-			_take_damage(45 + rng.randi_range(-5, 5))
+			_take_damage(35 + rng.randi_range(-5, 5))
 			print(health)
 
 func _on_DeathTimer_timeout():

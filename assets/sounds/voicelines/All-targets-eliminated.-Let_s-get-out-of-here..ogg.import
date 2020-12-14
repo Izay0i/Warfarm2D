@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/All-targets-eliminated.-Let_s-get-out-of-here..ogg-01ab1b0415be332abeed4411a25cb3c5.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/voicelines/All-targets-eliminated.-Let_s-get-out-of-here..ogg"
+dest_files=[ "res://.import/All-targets-eliminated.-Let_s-get-out-of-here..ogg-01ab1b0415be332abeed4411a25cb3c5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

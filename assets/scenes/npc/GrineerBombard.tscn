@@ -61,7 +61,7 @@ radius = 9.0
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 80, 16 )
+extents = Vector2( 80, 14 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 10, 16 )
@@ -93,7 +93,7 @@ script = ExtResource( 1 )
 position = Vector2( -24, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2( -43, -8 )
+position = Vector2( -43, 0 )
 shape = SubResource( 10 )
 
 [node name="Timer" type="Timer" parent="."]

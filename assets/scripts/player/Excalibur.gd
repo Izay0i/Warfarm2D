@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export var move_speed = 200
 export var health = 300
-export var shield = 200
+export var shield = 300
 
 signal grounded_updated(is_grounded)
 
@@ -22,6 +22,7 @@ onready var timer = $Timer
 onready var raycast = $RayCast2D
 onready var camera = $Camera2D
 onready var sword_sfx = $SwordSFX
+onready var hurt_sfx = $HurtSFX
 onready var player_health = $PlayerHealth
 
 var gravity
@@ -77,8 +78,8 @@ func _handle_status():
 
 	if health < 0:
 		health = 0
-		if get_tree().reload_current_scene() != OK:
-			print("Failed to reload current scene")
+		if get_tree().change_scene("res://assets/scenes/misc/GameOverScreen.tscn") != OK:
+			print("Failed to change to game over screen")
 
 func _handle_direction():
 	#player
@@ -141,7 +142,7 @@ func _handle_shooting():
 func _get_input():
 	if DEBUG:
 		if Input.is_action_pressed("debug"):
-			_teleport(Vector2(5248, 64))
+			_teleport(Vector2(9856, 64))
 
 #	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 #	if !is_on_floor() || raycast.is_colliding():
@@ -187,13 +188,14 @@ func _physics_process(delta):
 func _on_AnimatedSprite_animation_finished():
 	is_special_move = false
 
-func _on_SwordHit_body_entered(_body):
-	pass
-
 func _on_Timer_timeout():
 	timer.one_shot = false
 
 func _on_Area2D_area_entered(area):
+	if area.get_class() == "PowerUp":
+		shield = 300
+		health = 300
+
 	if area.name == "FallArea1":
 		_teleport(Vector2(1728, 288))
 
@@ -208,10 +210,16 @@ func _on_Area2D_area_entered(area):
 
 	rng.randomize()
 	if area.get_class() == "HomingMissile":
-		_take_damage(50 + rng.randi_range(-7, 10))
+		_take_damage(50 + rng.randi_range(-3, 10))
+		hurt_sfx.play()
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
-		_take_damage(25 + rng.randi_range(-3, 2))
+		_take_damage(35 + rng.randi_range(-2, 2))
+		hurt_sfx.play()
 
 func _on_SwordSFX_finished():
 	sound_has_played = true
+
+func _on_Area2D_body_entered(body):
+	if body.name == "GrineerShip":
+		get_tree().change_scene("res://assets/scenes/misc/TitleScreen.tscn")

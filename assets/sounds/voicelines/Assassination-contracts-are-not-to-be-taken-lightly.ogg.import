@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Assassination-contracts-are-not-to-be-taken-lightly.ogg-58fd87fdf4c3b75b161d26b1bad3e1a2.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/voicelines/Assassination-contracts-are-not-to-be-taken-lightly.ogg"
+dest_files=[ "res://.import/Assassination-contracts-are-not-to-be-taken-lightly.ogg-58fd87fdf4c3b75b161d26b1bad3e1a2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
