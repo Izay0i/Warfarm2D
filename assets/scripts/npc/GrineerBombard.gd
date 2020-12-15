@@ -82,6 +82,7 @@ func _handle_movement():
 			missile_position.position.x *= -1
 			animated_sprite.scale.x = -normal
 			detection_area.scale.x = -normal
+			detection_area.position.x *= -1
 
 		if !raycast.is_colliding():
 			normal *= -1
@@ -89,6 +90,7 @@ func _handle_movement():
 			missile_position.position.x *= -1
 			animated_sprite.scale.x = -normal
 			detection_area.scale.x = -normal
+			detection_area.position.x *= -1
 
 func _ready():
 	_start_timer()

@@ -59,9 +59,12 @@ func _physics_process(_delta):
 				state = JUMP
 			elif parent.velocity.y > 0 && !parent.is_on_floor():
 				state = FALL
+			elif Input.is_action_pressed("melee"):
+				parent.is_special_move = true
+				state = MELEE
 		JUMP:
 			#possible states: fall
-			if parent.velocity.y > 0:
+			if parent.velocity.y > 0 && state != SHOOT:
 				state = FALL
 			elif parent.is_on_floor(): #failsafe
 				state = IDLE

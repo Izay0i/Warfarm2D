@@ -24,6 +24,7 @@ onready var camera = $Camera2D
 onready var sword_sfx = $SwordSFX
 onready var hurt_sfx = $HurtSFX
 onready var player_health = $PlayerHealth
+onready var screen_shake = $Camera2D/ScreenShake
 
 var gravity
 var max_jump_velocity
@@ -77,7 +78,6 @@ func _handle_status():
 		shield = 0
 
 	if health < 0:
-		health = 0
 		if get_tree().change_scene("res://assets/scenes/misc/GameOverScreen.tscn") != OK:
 			print("Failed to change to game over screen")
 
@@ -108,8 +108,8 @@ func _handle_direction():
 func _handle_movement():
 	if can_move:
 		if Input.is_action_pressed("left") || Input.is_action_pressed("right"):
-			if !is_on_floor() || raycast.is_colliding():
-				velocity.x = lerp(velocity.x, move_speed * move_direction, 0.5)
+			#if !is_on_floor() || raycast.is_colliding():
+			velocity.x = lerp(velocity.x, move_speed * move_direction, 0.5)
 		else:
 			velocity.x *= move_direction
 
@@ -211,6 +211,7 @@ func _on_Area2D_area_entered(area):
 	rng.randomize()
 	if area.get_class() == "HomingMissile":
 		_take_damage(50 + rng.randi_range(-3, 10))
+		screen_shake.start()
 		hurt_sfx.play()
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
@@ -222,4 +223,9 @@ func _on_SwordSFX_finished():
 
 func _on_Area2D_body_entered(body):
 	if body.name == "GrineerShip":
-		get_tree().change_scene("res://assets/scenes/misc/TitleScreen.tscn")
+		if get_tree().change_scene("res://assets/scenes/misc/TitleScreen.tscn") != OK:
+			print("Failed to change to title screen")
+
+func _on_SwordHit_body_entered(body):
+	if body.get_class() == "GrineerLancer" || body.get_class() == "GrineerBombard":
+		screen_shake.start(0.2, 6, 5)

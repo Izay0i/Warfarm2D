@@ -11,13 +11,14 @@ onready var lotus_ui = $CanvasLayer/Lowtus/LowtusUI
 onready var dialog_timer = $CanvasLayer/Lowtus/DialogTimer
 onready var intro = $CanvasLayer/Lowtus/Intro
 onready var ending = $CanvasLayer/Lowtus/Ending
+onready var dialog_label = $CanvasLayer/Lowtus/DialogLabel
 onready var grineer_ship = $GrineerShip
 
 var enemies_left = 0
 var played_intro = false
 var played_ending = false
 
-#Going into game dev was a mistake
+#I'm running out of time
 #NPC spawns
 onready var spawn_positions_lancer : PoolVector2Array = [
 	Vector2(592, 272),
@@ -126,21 +127,27 @@ func _physics_process(_delta):
 					lotus_ui.visible = true
 					intro.play()
 					played_intro = true
+					dialog_label.visible = true
+					dialog_label.text = "There is a large platoon of Grineer Marines\nstationed here.\nLeave no one standing."
 
 	enemies_left = get_tree().get_nodes_in_group("enemies").size() - 1
 	objective.text = "Enemies left: %d/%d" % [enemies_left, MAX_ENEMIES]
 
 	if played_intro:
 		if enemies_left == 0 && !ending.is_playing() && !played_ending:
+			grineer_ship.enable_collision()
 			lotus_ui.visible = true
 			objective.visible = false
 			ending.play()
 			played_ending = true
-			grineer_ship.enable_collision()
+			dialog_label.visible = true
+			dialog_label.text = "All targets eliminated.\nLet's get out of here."
 
 func _on_Intro_finished():
 	lotus_ui.visible = false
 	objective.visible = true
+	dialog_label.visible = false
 
 func _on_Ending_finished():
 	lotus_ui.visible = false
+	dialog_label.visible = false
