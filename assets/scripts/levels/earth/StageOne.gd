@@ -7,12 +7,16 @@ const BOMBARD_SCENE = preload("res://assets/scenes/npc/GrineerBombard.tscn")
 const POWERUP_SCENE = preload("res://assets/scenes/misc/PowerUp.tscn")
 
 onready var objective = $CanvasLayer/ObjectiveLabel
+onready var objective_frame = $CanvasLayer/ObjectiveFrame
 onready var lotus_ui = $CanvasLayer/Lowtus/LowtusUI
+onready var dialog_label = $CanvasLayer/Lowtus/DialogLabel
 onready var dialog_timer = $CanvasLayer/Lowtus/DialogTimer
 onready var intro = $CanvasLayer/Lowtus/Intro
 onready var ending = $CanvasLayer/Lowtus/Ending
-onready var dialog_label = $CanvasLayer/Lowtus/DialogLabel
 onready var grineer_ship = $GrineerShip
+onready var lowtus = $CanvasLayer/Lowtus
+onready var tilemap = $TileMap
+onready var bg_ambience = $BackgroundAmbience
 
 var enemies_left = 0
 var played_intro = false
@@ -116,6 +120,10 @@ func _ready():
 	call_deferred("_spawn_lancers")
 	call_deferred("_spawn_bombards")
 	call_deferred("_spawn_power_ups")
+	
+#	var map_limits = tilemap.get_used_rect()
+#	var map_cellsize = tilemap.cell_size
+#	print("Limit left: %d\tLimit right: %d\nLimit top: %d\tLimit bottom: %d" % [map_limits.position.x * map_cellsize.x, map_limits.end.x * map_cellsize.x, map_limits.position.y * map_cellsize.y, map_limits.end.y * map_cellsize.y])
 
 func _physics_process(_delta):
 	if !played_intro:
@@ -124,10 +132,9 @@ func _physics_process(_delta):
 				if dialog_timer.is_stopped():
 					dialog_timer.start()
 				if dialog_timer.time_left == 3 && !intro.is_playing():
-					lotus_ui.visible = true
+					lowtus.visible = true
 					intro.play()
 					played_intro = true
-					dialog_label.visible = true
 					dialog_label.text = "There is a large platoon of Grineer Marines\nstationed here.\nLeave no one standing."
 
 	enemies_left = get_tree().get_nodes_in_group("enemies").size() - 1
@@ -135,19 +142,20 @@ func _physics_process(_delta):
 
 	if played_intro:
 		if enemies_left == 0 && !ending.is_playing() && !played_ending:
+			bg_ambience.stop()
 			grineer_ship.enable_collision()
-			lotus_ui.visible = true
+			grineer_ship.animated_sprite.play("hover")
+			lowtus.visible = true
 			objective.visible = false
+			objective_frame.visible = false
 			ending.play()
 			played_ending = true
-			dialog_label.visible = true
 			dialog_label.text = "All targets eliminated.\nLet's get out of here."
 
 func _on_Intro_finished():
-	lotus_ui.visible = false
 	objective.visible = true
-	dialog_label.visible = false
+	objective_frame.visible = true
+	lowtus.visible = false
 
 func _on_Ending_finished():
-	lotus_ui.visible = false
-	dialog_label.visible = false
+	lowtus.visible = false

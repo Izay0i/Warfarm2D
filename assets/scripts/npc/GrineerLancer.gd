@@ -27,6 +27,9 @@ var active = false
 func get_class():
 	return "GrineerLancer"
 
+func _teleport(pos):
+	self.global_position = pos
+
 func _start_timer():
 	timer.one_shot = true
 	timer.start()
@@ -108,6 +111,18 @@ func _on_CollisionArea_area_entered(area):
 		if area.name == "SwordHit":
 			_take_damage(35 + rng.randi_range(-5, 5))
 			print(health)
+
+	if area.name == "FallArea1":
+		_teleport(Vector2(1728, 288))
+
+	if area.name == "FallArea2":
+		_teleport(Vector2(3840, 384))
+
+	if area.name == "FallArea3":
+		_teleport(Vector2(5952, 296))
+
+	if area.name == "FallArea4":
+		_teleport(Vector2(9152, 360))
 
 func _on_DeathTimer_timeout():
 	queue_free()

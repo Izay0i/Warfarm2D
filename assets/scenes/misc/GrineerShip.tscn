@@ -37,13 +37,10 @@ animations = [ {
 "speed": 20.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=7]
-radius = 3.66667
-height = 10.0
+[sub_resource type="CircleShape2D" id=7]
 
 [node name="GrineerShip" type="KinematicBody2D"]
 scale = Vector2( 4, 4 )
-collision_layer = 4
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -55,7 +52,6 @@ animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 6, -2 )
-scale = Vector2( 6, 1 )
+position = Vector2( 14, 14 )
 shape = SubResource( 7 )
 disabled = true

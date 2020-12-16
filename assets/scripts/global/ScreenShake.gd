@@ -11,13 +11,13 @@ onready var duration = $Duration
 
 var amplitude = 0
 
-func start(duration = 0.2, frequency = 15, amplitude = 16):
-	self.amplitude = amplitude
-	self.duration.wait_time = duration
-	self.frequency.wait_time = 1 / float(frequency)
+func start(_duration = 0.2, _frequency = 15, _amplitude = 16):
+	amplitude = _amplitude
+	duration.wait_time = _duration
+	frequency.wait_time = 1 / float(_frequency)
 
-	self.duration.start()
-	self.frequency.start()
+	duration.start()
+	frequency.start()
 
 	_new_shake()
 

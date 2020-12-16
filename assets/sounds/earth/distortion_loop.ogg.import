@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/distortion_loop.ogg-f214935689dfc9bdeb82aa92358eb971.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/earth/distortion_loop.ogg"
+dest_files=[ "res://.import/distortion_loop.ogg-f214935689dfc9bdeb82aa92358eb971.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

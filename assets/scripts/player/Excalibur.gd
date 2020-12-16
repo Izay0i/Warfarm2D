@@ -60,7 +60,7 @@ func _shoot_bullet(direction):
 	bullet.set_bullet_direction(direction)
 
 func _teleport(pos):
-	get_parent().get_node("Excalibur").global_position = pos
+	self.global_position = pos
 
 func _take_damage(damage):
 	if shield > 0:
@@ -159,6 +159,7 @@ func _apply_movement():
 	if is_on_floor() && can_move == false:
 		can_move = true
 	
+	#var snap = Vector2.DOWN * 16 if is_on_floor() else Vector2.ZERO
 	velocity = move_and_slide(velocity, Vector2.UP, SLOPE_STOP)
 
 func _ready():
@@ -168,6 +169,9 @@ func _ready():
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
 	
 	_reset_timer()
+
+	if get_parent().name != "StageOne":
+		camera.current = true
 
 func _physics_process(delta):
 	_handle_status()
@@ -223,7 +227,7 @@ func _on_SwordSFX_finished():
 
 func _on_Area2D_body_entered(body):
 	if body.name == "GrineerShip":
-		if get_tree().change_scene("res://assets/scenes/misc/TitleScreen.tscn") != OK:
+		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
 			print("Failed to change to title screen")
 
 func _on_SwordHit_body_entered(body):
