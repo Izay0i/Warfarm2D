@@ -4,6 +4,7 @@ onready var tilemap = $TileMap
 onready var excalibur = $Excalibur
 onready var distortion_intro = $DistortionWorldIntro
 onready var distortion_loop = $DistortionWorldLoop
+onready var planet_bg = $ParallaxBackground/PurplePlanet
 
 func _set_camera_limit(left, top, right, bottom):
 	excalibur.camera.limit_left = left
@@ -27,6 +28,7 @@ func _on_DistortionWorldIntro_finished():
 func _on_TransitionToMain_body_entered(body):
 	if body.name == "Excalibur":
 		yield(get_tree().create_timer(0.7), "timeout")
+		planet_bg.visible = false
 		_set_camera_limit(160, 1024, 1920, 1760)
 		excalibur.global_position = Vector2(256, 1184)
 
@@ -98,5 +100,5 @@ func _on_Door2_body_entered(body):
 
 func _on_Door3_body_entered(body):
 	if body.name == "Excalibur":
-		_set_camera_limit(4384, 1600, 5184, 2240)
+		_set_camera_limit(4384, 1824, 5184, 2240)
 		excalibur.global_position = Vector2(4496, 2192)
