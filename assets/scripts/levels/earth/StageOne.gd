@@ -120,10 +120,6 @@ func _ready():
 	call_deferred("_spawn_lancers")
 	call_deferred("_spawn_bombards")
 	call_deferred("_spawn_power_ups")
-	
-#	var map_limits = tilemap.get_used_rect()
-#	var map_cellsize = tilemap.cell_size
-#	print("Limit left: %d\tLimit right: %d\nLimit top: %d\tLimit bottom: %d" % [map_limits.position.x * map_cellsize.x, map_limits.end.x * map_cellsize.x, map_limits.position.y * map_cellsize.y, map_limits.end.y * map_cellsize.y])
 
 func _physics_process(_delta):
 	if !played_intro:

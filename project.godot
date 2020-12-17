@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Warfarm2D"
-run/main_scene="res://assets/scenes/levels/earth/StageOne.tscn"
+run/main_scene="res://assets/scenes/levels/earth/StageTwo.tscn"
 boot_splash/image="res://assets/textures/miscs/the_arcana_is_the_means_by_which_all_is_revealed.png"
 config/icon="res://icon.png"
 

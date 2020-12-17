@@ -67,7 +67,7 @@ scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 scroll_offset = Vector2( 1, 0 )
 scroll_base_offset = Vector2( 1, 0 )
-scroll_base_scale = Vector2( 0.1, 1 )
+scroll_base_scale = Vector2( 0.1, 0.1 )
 
 [node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 1152, 0 )
