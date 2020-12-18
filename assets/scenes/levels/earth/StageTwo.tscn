@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/scenes/tileset/DarkHalls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/misc/GrineerShip.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/scenes/misc/PauseScreen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/scenes/tileset/Gate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/scenes/misc/Flamethrower.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/scenes/tileset/MovingPlatform2x1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1216, 32 )
@@ -96,72 +97,73 @@ position = Vector2( 5168, 2288 )
 
 [node name="PurpleFire" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 336, 144 )
+frame = 1
 
 [node name="PurpleFire2" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 3984, 1424 )
+frame = 1
 
 [node name="PurpleFire3" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4112, 1424 )
-frame = 2
 
 [node name="PurpleFire4" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 3344, 1680 )
-frame = 1
+frame = 2
 
 [node name="PurpleFire5" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 3280, 1744 )
-frame = 1
+frame = 2
 
 [node name="PurpleFire6" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 3408, 1744 )
+frame = 1
 
 [node name="PurpleFire7" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4432, 2160 )
-frame = 2
 
 [node name="PurpleFire8" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4560, 2160 )
-frame = 1
+frame = 2
 
 [node name="PurpleFire9" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4080, 3184 )
-frame = 1
+frame = 2
 
 [node name="PurpleFire10" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4144, 3184 )
+frame = 1
 
 [node name="PurpleFire11" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4048, 3248 )
+frame = 1
 
 [node name="PurpleFire12" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4176, 3248 )
-frame = 2
 
 [node name="PurpleFire13" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4304, 3248 )
-frame = 1
+frame = 2
 
 [node name="PurpleFire14" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4432, 3248 )
+frame = 1
 
 [node name="PurpleFire15" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4336, 3184 )
+frame = 1
 
 [node name="PurpleFire16" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4368, 3184 )
-frame = 2
 
 [node name="PurpleFire17" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 4400, 3184 )
-frame = 2
 
 [node name="PurpleFire18" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 6960, 2640 )
-frame = 2
 
 [node name="PurpleFire19" parent="DecoFire" instance=ExtResource( 5 )]
 position = Vector2( 7088, 2640 )
-frame = 1
+frame = 2
 
 [node name="Excalibur" parent="." instance=ExtResource( 3 )]
 position = Vector2( 168, 176 )
@@ -388,6 +390,11 @@ position = Vector2( 4720, 2192 )
 
 [node name="Flamethrower8" parent="Flamethrowers" instance=ExtResource( 11 )]
 position = Vector2( 4880, 2192 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="MovingPlatform2x1" parent="Platforms" instance=ExtResource( 12 )]
+position = Vector2( 536, 216 )
 [connection signal="finished" from="DistortionWorldIntro" to="." method="_on_DistortionWorldIntro_finished"]
 [connection signal="body_entered" from="CameraTransit/TransitionToMain" to="." method="_on_TransitionToMain_body_entered"]
 [connection signal="body_entered" from="CameraTransit/CamTransit1" to="." method="_on_CamTransit1_body_entered"]

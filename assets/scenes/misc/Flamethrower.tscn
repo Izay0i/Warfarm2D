@@ -28,7 +28,7 @@ animations = [ {
 "speed": 7.0
 } ]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 resource_name = "fire"
 length = 3.0
 loop = true
@@ -105,7 +105,7 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 
 [node name="Flamethrower" type="StaticBody2D"]
 script = ExtResource( 16 )
@@ -126,13 +126,14 @@ frames = SubResource( 2 )
 speed_scale = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Fire"]
+autoplay = "fire"
 playback_process_mode = 0
 playback_speed = 0.5
-anims/fire = SubResource( 4 )
+anims/fire = SubResource( 5 )
 
 [node name="FireHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireHitbox"]
 position = Vector2( 0, -16 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
