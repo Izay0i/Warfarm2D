@@ -4,7 +4,13 @@ onready var tilemap = $TileMap
 onready var excalibur = $Excalibur
 onready var distortion_intro = $DistortionWorldIntro
 onready var distortion_loop = $DistortionWorldLoop
+
 onready var planet_bg = $ParallaxBackground/PurplePlanet
+onready var bg_1 = $ParallaxBackground/Background1
+onready var bg_2 = $ParallaxBackground/Background2
+onready var bg_3 = $ParallaxBackground/Background3
+onready var bg_4 = $ParallaxBackground/Background4
+onready var bg_5 = $ParallaxBackground/Background5
 
 func _set_camera_limit(left, top, right, bottom):
 	excalibur.camera.limit_left = left
@@ -14,23 +20,28 @@ func _set_camera_limit(left, top, right, bottom):
 
 func _ready():
 	_set_camera_limit(80, 0, 896, 672)
-	#_set_camera_limit(0, 100000, 0, 100000)
 
 func _physics_process(_delta):
-	#print(tilemap.get_cellv(excalibur.global_position))
 	pass
 
 func _on_DistortionWorldIntro_finished():
-	if !distortion_loop.is_playing():
+	if !distortion_loop.playing:
 		distortion_loop.play()
 
 #Show me your motivation
 func _on_TransitionToMain_body_entered(body):
 	if body.name == "Excalibur":
 		yield(get_tree().create_timer(0.7), "timeout")
+
 		planet_bg.visible = false
+		bg_1.visible = true
+		bg_2.visible = true
+		bg_3.visible = true
+		bg_4.visible = true
+		bg_5.visible = true
+
 		_set_camera_limit(160, 1024, 1920, 1760)
-		excalibur.global_position = Vector2(256, 1184)
+		excalibur.global_position = Vector2(256, 1250)
 
 func _on_CamTransit1_body_entered(body):
 	if body.name == "Excalibur":
@@ -38,7 +49,7 @@ func _on_CamTransit1_body_entered(body):
 
 func _on_CamTransit2_body_entered(body):
 	if body.name == "Excalibur":
-		_set_camera_limit(160, 2528, 832, 2784)
+		_set_camera_limit(160, 2192, 864, 2944)
 
 func _on_CamTransit3_body_entered(body):
 	if body.name == "Excalibur":
@@ -82,7 +93,14 @@ func _on_CamTransit12_body_entered(body):
 
 func _on_CamTransit13_body_entered(body):
 	if body.name == "Excalibur":
-		_set_camera_limit(5184, 2080, 5760, 2240)
+		_set_camera_limit(5184, 2080, 6144, 2368)
+
+		planet_bg.visible = true
+		bg_1.visible = false
+		bg_2.visible = false
+		bg_3.visible = false
+		bg_4.visible = false
+		bg_5.visible = false
 
 func _on_CamTransit14_body_entered(body):
 	if body.name == "Excalibur":

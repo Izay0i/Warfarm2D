@@ -11,9 +11,7 @@ const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
 const DEBUG = true
 
 const MAX_HEALTH = 300
-const SLOPE_STOP = 64
 const MAX_JUMPS = 2
-#const FALL_LIMIT = 512
 
 onready var animated_sprite = $AnimatedSprite
 onready var animation_player = $AnimatedSprite/AnimationPlayer
@@ -42,16 +40,12 @@ var can_move = false
 var is_special_move = false
 var is_facing_right = true
 var is_grounded
-var snap = Vector2.DOWN setget set_snap_normal
 
 var sound_has_played = true
 
 var max_jump_height = 3 * Global.UNIT_SIZE
 var min_jump_height = 1.2 * Global.UNIT_SIZE
 var jump_duration = 0.38
-
-func set_snap_normal(_normal):
-	snap = _normal
 
 func _reset_timer():
 	timer.one_shot = true
@@ -68,10 +62,12 @@ func _teleport(pos):
 	self.global_position = pos
 
 func _take_damage(damage):
-	if shield > 0:
-		shield -= damage
-	else:
-		health -= damage
+	for i in damage:
+		yield(get_tree().create_timer(0.1), "timeout")
+		if shield > 0:
+			shield -= 1
+		else:
+			health -= 1
 
 	print("Shield: %d Health: %d" % [shield, health])
 
@@ -164,8 +160,8 @@ func _apply_movement():
 	if is_on_floor() && can_move == false:
 		can_move = true
 	
-	#var snap = Vector2.DOWN * 16 if is_on_floor() else Vector2.ZERO
-	velocity = move_and_slide_with_snap(velocity, snap * 1, Vector2.UP, SLOPE_STOP)
+	var slope_stop = true if get_floor_velocity().x == 0 else false
+	velocity = move_and_slide(velocity, Vector2.UP, slope_stop)
 
 func _ready():
 	move_speed = 3.25 * Global.UNIT_SIZE

@@ -139,8 +139,6 @@ func _physics_process(_delta):
 	if played_intro:
 		if enemies_left == 0 && !ending.is_playing() && !played_ending:
 			bg_ambience.stop()
-			grineer_ship.enable_collision()
-			grineer_ship.animated_sprite.play("hover")
 			lowtus.visible = true
 			objective.visible = false
 			objective_frame.visible = false
@@ -155,3 +153,5 @@ func _on_Intro_finished():
 
 func _on_Ending_finished():
 	lowtus.visible = false
+	grineer_ship.enable_collision()
+	grineer_ship.animated_sprite.play("hover")
