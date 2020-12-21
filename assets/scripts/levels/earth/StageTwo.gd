@@ -1,9 +1,15 @@
 extends Node
 
+const ELEVATOR_SCENE = preload("res://assets/scenes/tileset/Elevator.tscn")
+
 onready var tilemap = $TileMap
 onready var excalibur = $Excalibur
 onready var distortion_intro = $DistortionWorldIntro
 onready var distortion_loop = $DistortionWorldLoop
+
+onready var spawn_timer = $ElevatorSpawner/SpawnTimer
+onready var spawner_1 = $ElevatorSpawner/Spawner
+onready var spawner_2 = $ElevatorSpawner/Spawner2
 
 onready var planet_bg = $ParallaxBackground/PurplePlanet
 onready var bg_1 = $ParallaxBackground/Background1
@@ -21,8 +27,24 @@ func _set_camera_limit(left, top, right, bottom):
 func _ready():
 	_set_camera_limit(80, 0, 896, 672)
 
-func _physics_process(_delta):
-	pass
+func _spawn_elevator(spawner):
+	var elevator = ELEVATOR_SCENE.instance()
+	get_parent().add_child(elevator)
+	elevator.global_position = spawner.global_position
+
+func _free_entities():
+	for projectile in self.get_parent().get_children():
+		if projectile.get_class() == "Bullet" || projectile.get_class() == "HomingMissile":
+			projectile.queue_free()
+
+	for wisp in self.get_node("Wisps").get_children():
+		wisp.queue_free()
+
+	for grineer in self.get_node("Grineers").get_children():
+		grineer.queue_free()
+
+	for power_up in self.get_node("PowerUps").get_children():
+		power_up.queue_free()
 
 func _on_DistortionWorldIntro_finished():
 	if !distortion_loop.playing:
@@ -95,8 +117,6 @@ func _on_CamTransit13_body_entered(body):
 	if body.name == "Excalibur":
 		_set_camera_limit(5184, 2080, 6144, 2368)
 
-		planet_bg.visible = true
-		bg_1.visible = false
 		bg_2.visible = false
 		bg_3.visible = false
 		bg_4.visible = false
@@ -116,7 +136,24 @@ func _on_Door2_body_entered(body):
 		_set_camera_limit(4256, 2496, 7136, 3328)
 		excalibur.global_position = Vector2(4368, 3280)
 
+#Boss door
 func _on_Door3_body_entered(body):
 	if body.name == "Excalibur":
+		_free_entities()
+		distortion_intro.stop()
+		distortion_loop.stop()
 		_set_camera_limit(4384, 1824, 5184, 2240)
 		excalibur.global_position = Vector2(4496, 2192)
+
+func _on_Despawner_body_entered(body):
+	if body.get_parent().get_class() == "Elevator":
+		body.queue_free()
+
+func _on_Despawner2_body_entered(body):
+	if body.get_parent().get_class() == "Elevator":
+		body.queue_free()
+
+func _on_SpawnTimer_timeout():
+	_spawn_elevator(spawner_1)
+	_spawn_elevator(spawner_2)
+	spawn_timer.start()

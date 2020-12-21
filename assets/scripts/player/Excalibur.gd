@@ -28,6 +28,7 @@ onready var screen_shake = $Camera2D/ScreenShake
 var gravity
 var max_jump_velocity
 var min_jump_velocity
+var platform_velocity = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -127,7 +128,7 @@ func _handle_jumping():
 	if Input.is_action_just_pressed("jump"):
 		if jump_count < MAX_JUMPS:
 			jump_count += 1
-			velocity.y = min_jump_velocity
+			velocity.y = min_jump_velocity - platform_velocity
 			on_ground = false
 
 func _handle_shooting():
@@ -176,7 +177,6 @@ func _ready():
 
 func _physics_process(delta):
 	_handle_status()
-
 	_get_input()
 	_apply_gravity(delta)
 	_apply_movement()
@@ -227,10 +227,21 @@ func _on_Area2D_area_entered(area):
 		_take_damage(MAX_HEALTH * 0.25)
 		hurt_sfx.play()
 
+	if area.get_parent().get_parent().get_class() == "Wisp":
+		_take_damage(15 + rng.randi_range(-2, 2))
+		hurt_sfx.play()
+
 func _on_SwordSFX_finished():
 	sound_has_played = true
 
 func _on_Area2D_body_entered(body):
+	if body.name == "CrystalSpike":
+		_take_damage(8)
+		hurt_sfx.play()
+
+	if body.get_parent().get_class() == "Elevator":
+		platform_velocity = body.get_floor_velocity().y
+
 	if body.name == "GrineerShip":
 		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
 			print("Failed to change to title screen")
