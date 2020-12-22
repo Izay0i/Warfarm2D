@@ -200,36 +200,45 @@ func _on_Area2D_area_entered(area):
 	if area.get_class() == "PowerUp":
 		shield = 300
 		health = 300
+		return
 
 	if area.name == "FallArea1":
 		_teleport(Vector2(1728, 288))
+		return
 
 	if area.name == "FallArea2":
 		_teleport(Vector2(3840, 384))
+		return
 
 	if area.name == "FallArea3":
 		_teleport(Vector2(5952, 296))
+		return
 
 	if area.name == "FallArea4":
 		_teleport(Vector2(9152, 360))
+		return
 
 	rng.randomize()
 	if area.get_class() == "HomingMissile":
 		_take_damage(50 + rng.randi_range(-3, 10))
 		screen_shake.start()
 		hurt_sfx.play()
+		return
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
 		_take_damage(35 + rng.randi_range(-2, 2))
 		hurt_sfx.play()
+		return
 
 	if area.get_parent().get_class() == "Flamethrower":
 		_take_damage(MAX_HEALTH * 0.25)
 		hurt_sfx.play()
+		return
 
 	if area.get_parent().get_parent().get_class() == "Wisp":
 		_take_damage(15 + rng.randi_range(-2, 2))
 		hurt_sfx.play()
+		return
 
 func _on_SwordSFX_finished():
 	sound_has_played = true

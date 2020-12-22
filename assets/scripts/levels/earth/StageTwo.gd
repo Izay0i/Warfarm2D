@@ -6,6 +6,8 @@ onready var tilemap = $TileMap
 onready var excalibur = $Excalibur
 onready var distortion_intro = $DistortionWorldIntro
 onready var distortion_loop = $DistortionWorldLoop
+onready var bossfight_intro = $BossfightIntro
+onready var bossfight_loop = $BossfightLoop
 
 onready var spawn_timer = $ElevatorSpawner/SpawnTimer
 onready var spawner_1 = $ElevatorSpawner/Spawner
@@ -18,6 +20,18 @@ onready var bg_3 = $ParallaxBackground/Background3
 onready var bg_4 = $ParallaxBackground/Background4
 onready var bg_5 = $ParallaxBackground/Background5
 
+onready var lowtus = $CanvasLayer/Lowtus
+onready var dialog_label = $CanvasLayer/Lowtus/DialogLabel
+onready var dialog_timer = $CanvasLayer/Lowtus/DialogTimer
+onready var intro = $CanvasLayer/Lowtus/Intro
+onready var detected = $CanvasLayer/Lowtus/Detected
+onready var boss_killed = $CanvasLayer/Lowtus/BossKilled
+
+onready var objective_frame = $CanvasLayer/ObjectiveFrame
+onready var objective_label = $CanvasLayer/ObjectiveLabel
+
+var played_intro = false
+
 func _set_camera_limit(left, top, right, bottom):
 	excalibur.camera.limit_left = left
 	excalibur.camera.limit_top = top
@@ -26,6 +40,14 @@ func _set_camera_limit(left, top, right, bottom):
 
 func _ready():
 	_set_camera_limit(80, 0, 896, 672)
+
+func _physics_process(_delta):
+	if !played_intro:
+		if dialog_timer.time_left == 3 && !intro.playing:
+			played_intro = true
+			lowtus.visible = true
+			dialog_label.text = "Assassination contracts are not to be taken lightly.\nEliminating this target will have significant impact on enemy forces.\nSearch the area, leave no survivors."
+			intro.play()
 
 func _spawn_elevator(spawner):
 	var elevator = ELEVATOR_SCENE.instance()
@@ -145,6 +167,11 @@ func _on_Door3_body_entered(body):
 		_set_camera_limit(4384, 1824, 5184, 2240)
 		excalibur.global_position = Vector2(4496, 2192)
 
+		detected.play()
+		lowtus.visible = true
+		dialog_label.text = "The assassination target is here. Wipe them out."
+		bossfight_intro.play()
+
 func _on_Despawner_body_entered(body):
 	if body.get_parent().get_class() == "Elevator":
 		body.queue_free()
@@ -157,3 +184,18 @@ func _on_SpawnTimer_timeout():
 	_spawn_elevator(spawner_1)
 	_spawn_elevator(spawner_2)
 	spawn_timer.start()
+
+func _on_Intro_finished():
+	objective_frame.visible = true
+	objective_label.visible = true
+	lowtus.visible = false
+
+func _on_Detected_finished():
+	lowtus.visible = false
+
+func _on_BossKilled_finished():
+	lowtus.visible = false
+
+func _on_BossfightIntro_finished():
+	if !bossfight_loop.playing:
+		bossfight_loop.play()
