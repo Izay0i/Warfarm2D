@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bonk.ogg-4074cbd8eba71b4615c5c1f88d4d9585.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bossfight/bonk.ogg"
+dest_files=[ "res://.import/bonk.ogg-4074cbd8eba71b4615c5c1f88d4d9585.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

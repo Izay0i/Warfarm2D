@@ -59,8 +59,8 @@ func _free_entities():
 		if projectile.get_class() == "Bullet" || projectile.get_class() == "HomingMissile":
 			projectile.queue_free()
 
-	for wisp in self.get_node("Wisps").get_children():
-		wisp.queue_free()
+#	for wisp in self.get_node("Wisps").get_children():
+#		wisp.queue_free()
 
 	for grineer in self.get_node("Grineers").get_children():
 		grineer.queue_free()
@@ -192,6 +192,7 @@ func _on_Intro_finished():
 
 func _on_Detected_finished():
 	lowtus.visible = false
+	dialog_label.text = "Target down, assassination contract complete. Great work Tenno."
 
 func _on_BossKilled_finished():
 	lowtus.visible = false

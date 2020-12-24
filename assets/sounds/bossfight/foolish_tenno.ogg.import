@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/foolish_tenno.ogg-5afe05c5b4041c26428c27e8dc2ad621.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/bossfight/foolish_tenno.ogg"
+dest_files=[ "res://.import/foolish_tenno.ogg-5afe05c5b4041c26428c27e8dc2ad621.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

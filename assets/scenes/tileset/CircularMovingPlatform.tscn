@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 8 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "circular"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Circular/PathFollow2D:unit_offset")
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "values": [ 0.1 ]
 }
 
-[sub_resource type="Curve2D" id=2]
+[sub_resource type="Curve2D" id=3]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 8, -80, 0, 0, 0, 0, 24, -104, 0, 0, 0, 0, 56, -120, 0, 0, 0, 0, 96, -128, 0, 0, 0, 0, 144, -120, 0, 0, 0, 0, 168, -104, 0, 0, 0, 0, 184, -80, 0, 0, 0, 0, 192, -40, 0, 0, 0, 0, 192, 0, 0, 0, 0, 0, 192, 40, 0, 0, 0, 0, 184, 80, 0, 0, 0, 0, 168, 104, 0, 0, 0, 0, 144, 120, 0, 0, 0, 0, 96, 128, 0, 0, 0, 0, 56, 120, 0, 0, 0, 0, 24, 104, 0, 0, 0, 0, 8, 80, 0, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0 )
 }
@@ -58,10 +58,10 @@ one_way_collision = true
 autoplay = "circular"
 playback_process_mode = 0
 playback_speed = 0.1
-anims/circular = SubResource( 3 )
+anims/circular = SubResource( 2 )
 
 [node name="Circular" type="Path2D" parent="."]
-curve = SubResource( 2 )
+curve = SubResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }

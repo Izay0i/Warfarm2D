@@ -63,12 +63,10 @@ func _teleport(pos):
 	self.global_position = pos
 
 func _take_damage(damage):
-	for i in damage:
-		yield(get_tree().create_timer(0.1), "timeout")
-		if shield > 0:
-			shield -= 1
-		else:
-			health -= 1
+	if shield > 0:
+		shield -= damage
+	else:
+		health -= damage
 
 	print("Shield: %d Health: %d" % [shield, health])
 
@@ -158,7 +156,7 @@ func _apply_gravity(delta):
 	velocity.y += gravity * delta
 
 func _apply_movement():
-	if is_on_floor() && can_move == false:
+	if is_on_floor() && !can_move:
 		can_move = true
 	
 	var slope_stop = true if get_floor_velocity().x == 0 else false
