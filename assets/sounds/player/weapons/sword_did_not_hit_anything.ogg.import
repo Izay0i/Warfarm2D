@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sword_did_not_hit_anything.ogg-a6432f8cbb06ed43d1caccf1cdbbcc67.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/player/weapons/sword_did_not_hit_anything.ogg"
+dest_files=[ "res://.import/sword_did_not_hit_anything.ogg-a6432f8cbb06ed43d1caccf1cdbbcc67.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

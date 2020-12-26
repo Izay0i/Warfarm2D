@@ -26,7 +26,12 @@ func _spawn_player():
 	player.position.x = get_node(".").global_position.x
 	player.position.y = get_node(".").global_position.y + 50
 	get_parent().add_child(player)
-	print(get_parent().name)
+	player.controls_ui.visible = false
+	
+	player.camera.limit_left = 0
+	player.camera.limit_top = -136
+	player.camera.limit_right = 7360
+	player.camera.limit_bottom = 736
 
 func _physics_process(delta):
 	_move_forward(delta)

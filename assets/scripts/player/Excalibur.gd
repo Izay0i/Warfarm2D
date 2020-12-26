@@ -1,28 +1,31 @@
 extends KinematicBody2D
 
-export var move_speed = 200
-export var health = 300
-export var shield = 300
-
-signal grounded_updated(is_grounded)
+#signal grounded_updated(is_grounded)
 
 const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
 
 const DEBUG = true
 
 const MAX_HEALTH = 300
+const MAX_SHIELD = 300
 const MAX_JUMPS = 2
+
+export var move_speed = 200
+export var health = MAX_HEALTH
+export var shield = MAX_SHIELD
 
 onready var animated_sprite = $AnimatedSprite
 onready var animation_player = $AnimatedSprite/AnimationPlayer
 onready var sword_hitbox = $AnimatedSprite/SwordHit/CollisionShape2D
 onready var bullet_position = $Position2D
 onready var timer = $Timer
+onready var recharge_timer = $RechargeTimer
 onready var raycast = $RayCast2D
 onready var camera = $Camera2D
 onready var sword_sfx = $SwordSFX
 onready var hurt_sfx = $HurtSFX
-onready var player_health = $PlayerHealth
+onready var player_health = $CanvasLayer/PlayerHealth
+onready var controls_ui = $CanvasLayer/ControlsUI
 onready var screen_shake = $Camera2D/ScreenShake
 
 var gravity
@@ -63,6 +66,7 @@ func _teleport(pos):
 	self.global_position = pos
 
 func _take_damage(damage):
+	recharge_timer.start()
 	if shield > 0:
 		shield -= damage
 	else:
@@ -74,10 +78,16 @@ func _take_damage(damage):
 func _handle_status():
 	player_health.update_status(shield, health)
 
+	if recharge_timer.is_stopped() && shield < MAX_SHIELD:
+		#yield(get_tree().create_timer(2.0), "timeout")
+		shield += 1
+
 	if shield < 0:
 		shield = 0
 
-	if health <= 0:
+	if health > MAX_HEALTH:
+		health = MAX_HEALTH
+	elif health <= 0:
 		if get_tree().change_scene("res://assets/scenes/misc/GameOverScreen.tscn") != OK:
 			print("Failed to change to game over screen")
 
@@ -129,15 +139,15 @@ func _handle_jumping():
 			velocity.y = min_jump_velocity - platform_velocity
 			on_ground = false
 
-func _handle_shooting():
-	if Input.is_action_pressed("shoot") && !Input.is_action_pressed("melee"):
-		if move_direction == 0:
-				if timer.is_stopped():
-					if is_facing_right:
-						_shoot_bullet(1)
-					else:
-						_shoot_bullet(-1)
-					_reset_timer()
+#func _handle_shooting():
+#	if Input.is_action_pressed("shoot") && !Input.is_action_pressed("melee"):
+#		if move_direction == 0:
+#				if timer.is_stopped():
+#					if is_facing_right:
+#						_shoot_bullet(1)
+#					else:
+#						_shoot_bullet(-1)
+#					_reset_timer()
 
 func _get_input():
 	if DEBUG:
@@ -150,7 +160,7 @@ func _get_input():
 	_handle_direction()
 	_handle_movement()
 	_handle_jumping()
-	_handle_shooting()
+	#_handle_shooting()
 
 func _apply_gravity(delta):
 	velocity.y += gravity * delta
@@ -179,14 +189,11 @@ func _physics_process(delta):
 	_apply_gravity(delta)
 	_apply_movement()
 
-	var was_grounded = is_grounded
-	is_grounded = is_on_floor()
-
-	if was_grounded == null || is_grounded != was_grounded:
-		emit_signal("grounded_updated", is_grounded)
-
-#	if get_parent().get_node("Excalibur").global_position.y > FALL_LIMIT:
-#		_teleport(Vector2(3840, 384))
+#	var was_grounded = is_grounded
+#	is_grounded = is_on_floor()
+#
+#	if was_grounded == null || is_grounded != was_grounded:
+#		emit_signal("grounded_updated", is_grounded)
 
 func _on_AnimatedSprite_animation_finished():
 	is_special_move = false
@@ -196,45 +203,28 @@ func _on_Timer_timeout():
 
 func _on_Area2D_area_entered(area):
 	if area.get_class() == "PowerUp":
-		shield = 300
-		health = 300
-		return
-
-	if area.name == "FallArea1":
-		_teleport(Vector2(1728, 288))
-		return
-
-	if area.name == "FallArea2":
-		_teleport(Vector2(3840, 384))
-		return
-
-	if area.name == "FallArea3":
-		_teleport(Vector2(5952, 296))
-		return
-
-	if area.name == "FallArea4":
-		_teleport(Vector2(9152, 360))
+		health += 125
 		return
 
 	rng.randomize()
 	if area.get_class() == "HomingMissile":
-		_take_damage(50 + rng.randi_range(-3, 10))
+		_take_damage(100 + rng.randi_range(-3, 10))
 		screen_shake.start()
 		hurt_sfx.play()
 		return
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
-		_take_damage(35 + rng.randi_range(-2, 2))
-		hurt_sfx.play()
-		return
-
-	if area.get_parent().get_class() == "Flamethrower":
-		_take_damage(MAX_HEALTH * 0.25)
+		_take_damage(85 + rng.randi_range(-2, 2))
 		hurt_sfx.play()
 		return
 
 	if area.get_parent().get_parent().get_class() == "Wisp":
-		_take_damage(15 + rng.randi_range(-2, 2))
+		_take_damage(65 + rng.randi_range(-2, 2))
+		hurt_sfx.play()
+		return
+
+	if area.get_parent().get_class() == "Flamethrower":
+		_take_damage(MAX_HEALTH * 0.45)
 		hurt_sfx.play()
 		return
 
@@ -243,16 +233,16 @@ func _on_SwordSFX_finished():
 
 func _on_Area2D_body_entered(body):
 	if body.name == "CrystalSpike":
-		_take_damage(8)
+		_take_damage(MAX_HEALTH * 0.5)
 		hurt_sfx.play()
 
 	if body.get_parent().get_class() == "Elevator":
 		platform_velocity = body.get_floor_velocity().y
 
-	if body.name == "GrineerShip":
-		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
-			print("Failed to change to title screen")
+func _on_SwordHit_body_entered(_body):
+	sword_sfx.play()
+	screen_shake.start(0.1, 15, 5)
 
-func _on_SwordHit_body_entered(body):
-	if body.get_class() == "GrineerLancer" || body.get_class() == "GrineerBombard":
-		screen_shake.start(0.2, 6, 5)
+func _on_SwordHit_area_entered(area):
+	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
+		area.queue_free()

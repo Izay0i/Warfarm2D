@@ -12,9 +12,9 @@ __meta__ = {
 }
 
 [node name="SwordUI" type="TextureRect" parent="."]
-margin_left = 104.0
+margin_left = 72.0
 margin_top = 8.0
-margin_right = 152.0
+margin_right = 120.0
 margin_bottom = 56.0
 texture = ExtResource( 4 )
 expand = true
@@ -23,6 +23,7 @@ __meta__ = {
 }
 
 [node name="GunUI" type="TextureRect" parent="."]
+visible = false
 margin_left = 8.0
 margin_top = 8.0
 margin_right = 56.0
@@ -35,9 +36,9 @@ __meta__ = {
 
 [node name="LeftUI" type="TextureRect" parent="."]
 margin_left = 8.0
-margin_top = 104.0
+margin_top = 64.0
 margin_right = 56.0
-margin_bottom = 152.0
+margin_bottom = 112.0
 texture = ExtResource( 2 )
 expand = true
 __meta__ = {
@@ -45,10 +46,10 @@ __meta__ = {
 }
 
 [node name="RightUI" type="TextureRect" parent="."]
-margin_left = 104.0
-margin_top = 104.0
-margin_right = 152.0
-margin_bottom = 152.0
+margin_left = 72.0
+margin_top = 64.0
+margin_right = 120.0
+margin_bottom = 112.0
 texture = ExtResource( 1 )
 expand = true
 __meta__ = {
@@ -56,10 +57,10 @@ __meta__ = {
 }
 
 [node name="JumpUI" type="TextureRect" parent="."]
-margin_left = 56.0
-margin_top = 56.0
-margin_right = 104.0
-margin_bottom = 104.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 56.0
 texture = ExtResource( 5 )
 expand = true
 __meta__ = {

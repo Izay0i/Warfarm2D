@@ -72,15 +72,15 @@ func _handle_movement():
 			normal *= -1
 			raycast.position.x *= -1
 			bullet_position.position.x *= -1
+			detection_area.position.x *= -1
 			animated_sprite.scale.x = -normal
-			detection_area.scale.x = -normal
 
 		if !raycast.is_colliding():
 			normal *= -1
 			raycast.position.x *= -1
 			bullet_position.position.x *= -1
+			detection_area.position.x *= -1
 			animated_sprite.scale.x = -normal
-			detection_area.scale.x = -normal
 
 func _ready():
 	_start_timer()

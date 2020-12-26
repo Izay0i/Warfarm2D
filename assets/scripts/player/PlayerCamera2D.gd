@@ -2,7 +2,7 @@ extends Camera2D
 
 const SHIFT_TRANS = Tween.TRANS_SINE
 const SHIFT_EASE = Tween.EASE_OUT
-const SHIFT_DURATION = 1.0
+const SHIFT_DURATION = 0.1
 
 onready var prev_camera_pos = get_camera_position()
 onready var tween = $ShiftTween
