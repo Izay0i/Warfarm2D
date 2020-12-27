@@ -16,6 +16,7 @@ onready var grineer_ship = $GrineerShip
 onready var lowtus = $CanvasLayer/Lowtus
 onready var tilemap = $TileMap
 onready var bg_ambience = $BackgroundAmbience
+onready var water_sfx = $WaterSFX
 onready var dj_text = $Guides/DoubleJumpText
 onready var congrats_text = $Guides/CongratsText
 
@@ -113,7 +114,7 @@ func _ready():
 	call_deferred("_spawn_power_ups")
 
 func _physics_process(_delta):
-	enemies_left = get_tree().get_nodes_in_group("enemies").size() - 1
+	enemies_left = get_tree().get_nodes_in_group("enemies").size()
 	objective.text = "Eliminate all targets.\nEnemies left: %d/%d" % [enemies_left, MAX_ENEMIES]
 	_play_ending()
 
@@ -130,16 +131,19 @@ func _on_Ending_finished():
 func _on_FallArea1_body_entered(body):
 	if body.name != "TileMap":
 		body.global_position = Vector2(448, 512)
+		water_sfx.play()
 
 func _on_FallArea2_body_entered(body):
 	if body.name != "TileMap":
 		if body.name == "Excalibur":
 			dj_text.visible = true
 		body.global_position = Vector2(2048, 448)
+		water_sfx.play()
 
 func _on_FallArea3_body_entered(body):
 	if body.name != "TileMap":
 		body.global_position = Vector2(4032, 512)
+		water_sfx.play()
 
 func _on_TriggerStart_body_entered(body):
 	if body.name == "Excalibur":

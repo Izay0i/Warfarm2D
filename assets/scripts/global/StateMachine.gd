@@ -83,8 +83,6 @@ func _physics_process(_delta):
 			#possible states: idle, fall
 			if !parent.is_special_move:
 				state = IDLE
-#			if !parent.raycast.is_colliding():
-#				state = FALL
 #		SHOOT:
 #			#possible states: idle, fall
 #			if !parent.is_special_move:

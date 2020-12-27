@@ -79,7 +79,6 @@ func _handle_status():
 	player_health.update_status(shield, health)
 
 	if recharge_timer.is_stopped() && shield < MAX_SHIELD:
-		#yield(get_tree().create_timer(2.0), "timeout")
 		shield += 1
 
 	if shield < 0:
@@ -152,7 +151,7 @@ func _handle_jumping():
 func _get_input():
 	if DEBUG:
 		if Input.is_action_pressed("debug"):
-			_teleport(Vector2(9856, 64))
+			_teleport(Vector2(7008, 2528))
 
 #	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 #	if !is_on_floor() || raycast.is_colliding():
@@ -220,6 +219,11 @@ func _on_Area2D_area_entered(area):
 
 	if area.get_parent().get_parent().get_class() == "Wisp":
 		_take_damage(65 + rng.randi_range(-2, 2))
+		hurt_sfx.play()
+		return
+
+	if area.name == "BatonHitbox":
+		_take_damage(70 + rng.randi_range(5, 15))
 		hurt_sfx.play()
 		return
 

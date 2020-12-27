@@ -333,14 +333,14 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 27 )
-animation = "idle"
+animation = "melee"
+frame = 4
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
 playback_process_mode = 0
-playback_speed = 64.0
 anims/melee = SubResource( 28 )
 anims/slide = SubResource( 29 )
 
@@ -355,6 +355,7 @@ shape = SubResource( 30 )
 disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 zoom = Vector2( 0.45, 0.45 )
 process_mode = 0
 limit_smoothed = true

@@ -1,6 +1,7 @@
 extends Node
 
 const ELEVATOR_SCENE = preload("res://assets/scenes/tileset/Elevator.tscn")
+const VOR_SCENE = preload("res://assets/scenes/npc/CaptainVor.tscn")
 
 onready var tilemap = $TileMap
 onready var excalibur = $Excalibur
@@ -8,6 +9,7 @@ onready var distortion_intro = $DistortionWorldIntro
 onready var distortion_loop = $DistortionWorldLoop
 onready var bossfight_intro = $BossfightIntro
 onready var bossfight_loop = $BossfightLoop
+onready var victory = $Victory
 
 onready var spawn_timer = $ElevatorSpawner/SpawnTimer
 onready var spawner_1 = $ElevatorSpawner/Spawner
@@ -30,6 +32,8 @@ onready var boss_killed = $CanvasLayer/Lowtus/BossKilled
 onready var objective_frame = $CanvasLayer/ObjectiveFrame
 onready var objective_label = $CanvasLayer/ObjectiveLabel
 
+onready var gate = $Gate
+
 var played_intro = false
 
 func _set_camera_limit(left, top, right, bottom):
@@ -42,6 +46,20 @@ func _ready():
 	_set_camera_limit(80, 0, 896, 672)
 
 func _physics_process(_delta):
+	if victory.playing:
+		bossfight_intro.stop()
+		if bossfight_loop.playing:
+			bossfight_loop.stop()
+
+	if get_node("CaptainVor"):
+		if !get_node("CaptainVor").cut_scene:
+			excalibur.camera.current = true
+
+		if get_node("CaptainVor").health <= 0:
+			if !boss_killed.playing:
+				lowtus.visible = true
+				boss_killed.play()
+
 	if !played_intro:
 		if dialog_timer.time_left == 3 && !intro.playing:
 			played_intro = true
@@ -170,7 +188,6 @@ func _on_Door3_body_entered(body):
 		detected.play()
 		lowtus.visible = true
 		dialog_label.text = "The assassination target is here. Wipe them out."
-		bossfight_intro.play()
 
 func _on_Despawner_body_entered(body):
 	if body.get_parent().get_class() == "Elevator":
@@ -179,6 +196,11 @@ func _on_Despawner_body_entered(body):
 func _on_Despawner2_body_entered(body):
 	if body.get_parent().get_class() == "Elevator":
 		body.queue_free()
+
+func _on_LisetArea_body_entered(body):
+	if body.name == "Excalibur":
+		if get_tree().change_scene("res://assets/scenes/misc/EndScreen.tscn") != OK:
+			print("Failed to change to end screen")
 
 func _on_SpawnTimer_timeout():
 	_spawn_elevator(spawner_1)
@@ -192,10 +214,18 @@ func _on_Intro_finished():
 
 func _on_Detected_finished():
 	lowtus.visible = false
+	bossfight_intro.play()
+
+	var vor = VOR_SCENE.instance()
+	vor.global_position = Vector2(4784, 2048)
+	add_child(vor)
+
 	dialog_label.text = "Target down, assassination contract complete. Great work Tenno."
 
 func _on_BossKilled_finished():
 	lowtus.visible = false
+	gate.queue_free()
+	victory.play()
 
 func _on_BossfightIntro_finished():
 	if !bossfight_loop.playing:

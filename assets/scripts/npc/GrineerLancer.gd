@@ -68,14 +68,7 @@ func _handle_movement():
 		velocity.y += GRAVITY
 		velocity = move_and_slide(velocity, Vector2.UP)
 
-		if is_on_wall():
-			normal *= -1
-			raycast.position.x *= -1
-			bullet_position.position.x *= -1
-			detection_area.position.x *= -1
-			animated_sprite.scale.x = -normal
-
-		if !raycast.is_colliding():
+		if is_on_wall() || !raycast.is_colliding():
 			normal *= -1
 			raycast.position.x *= -1
 			bullet_position.position.x *= -1

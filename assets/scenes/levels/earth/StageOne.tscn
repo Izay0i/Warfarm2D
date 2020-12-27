@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/scenes/misc/GrineerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/tileset/EarthTile.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/textures/player/jump_ui.png" type="Texture" id=18]
 [ext_resource path="res://assets/textures/player/sword_ui.png" type="Texture" id=19]
 [ext_resource path="res://assets/scenes/npc/TargetDummy.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/sounds/earth/water.ogg" type="AudioStream" id=21]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 14 )
@@ -49,9 +50,7 @@ extents = Vector2( 288, 56 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 16, 48 )
 
-[node name="StageOne" type="Node" groups=[
-"enemies",
-]]
+[node name="StageOne" type="Node"]
 script = ExtResource( 10 )
 
 [node name="GrineerShip" parent="." instance=ExtResource( 1 )]
@@ -67,6 +66,10 @@ tile_data = PoolIntArray( -196415, 10, 65536, -196414, 10, 65537, -196413, 10, 6
 stream = ExtResource( 4 )
 volume_db = -15.0
 autoplay = true
+
+[node name="WaterSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -15.0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_offset = Vector2( 1, 0 )

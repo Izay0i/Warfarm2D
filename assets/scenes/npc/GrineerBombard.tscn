@@ -67,6 +67,7 @@ extents = Vector2( 80, 14 )
 extents = Vector2( 10, 16 )
 
 [node name="GrineerBombard" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
