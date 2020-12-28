@@ -18,6 +18,7 @@ const SPEED = 100
 
 var rng = RandomNumberGenerator.new()
 
+var speed_mod = 1.0
 var health = 300
 var velocity = Vector2.ZERO
 var normal = -1
@@ -58,13 +59,14 @@ func _handle_status():
 func _handle_movement():
 	if health > 0:
 		if is_enemy_spotted == false:
-			velocity.x = SPEED * normal
+			speed_mod = 1.0
 		else:
-			velocity.x = 0
+			speed_mod = 0.7
 			if timer.is_stopped():
 				_shoot_bullet(normal)
 				_start_timer()
 
+		velocity.x = SPEED * normal * speed_mod
 		velocity.y += GRAVITY
 		velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -99,11 +101,9 @@ func _on_CollisionArea_area_entered(area):
 		rng.randomize()
 		if area.get_class() == "Bullet" && area.get_tag() == "PLAYER":
 			_take_damage(20 + rng.randi_range(-3, 5))
-			print(health)
 
 		if area.name == "SwordHit":
 			_take_damage(35 + rng.randi_range(-5, 5))
-			print(health)
 
 	if area.name == "FallArea1":
 		_teleport(Vector2(1728, 288))

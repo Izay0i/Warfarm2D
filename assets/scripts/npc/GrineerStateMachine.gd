@@ -29,17 +29,19 @@ func _physics_process(_delta):
 		IDLE:
 			if parent.velocity.x != 0:
 				state = RUN
-			elif parent.get("is_enemy_spotted"):
+			elif parent.is_enemy_spotted:
 				state = SHOOT
 			elif parent.health <= 0:
 				state = DIE
 		RUN:
 			if parent.velocity.x == 0:
 				state = IDLE
+			elif parent.is_enemy_spotted:
+				state = SHOOT
 			elif parent.health <= 0:
 				state = DIE
 		SHOOT:
-			if !parent.get("is_enemy_spotted"):
+			if !parent.is_enemy_spotted:
 				state = IDLE
 			elif parent.health <= 0:
 				state = DIE

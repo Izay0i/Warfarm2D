@@ -68,7 +68,7 @@ func _handle_status():
 	if health <= 0:
 		if death_timer.is_stopped():
 			death_timer.start()
-		if death_sfx.playing:
+		if !death_sfx.playing:
 			death_sfx.play()
 
 func _handle_movement():
@@ -91,7 +91,7 @@ func _ready():
 	health_bar.max_value = health
 
 	camera.limit_left = 4384
-	camera.limit_top = 1824
+	camera.limit_top = 1856
 	camera.limit_right = 5184
 	camera.limit_bottom = 2240
 	camera.current = true
@@ -101,8 +101,6 @@ func _physics_process(_delta):
 		intro.play()
 
 	health_bar.value = health
-	if health <= 0:
-		queue_free()
 
 	_handle_status()
 	_handle_movement()

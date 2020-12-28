@@ -51,11 +51,15 @@ func _physics_process(_delta):
 		if bossfight_loop.playing:
 			bossfight_loop.stop()
 
-	if get_node("CaptainVor"):
+	if has_node("CaptainVor"):
 		if !get_node("CaptainVor").cut_scene:
 			excalibur.camera.current = true
 
 		if get_node("CaptainVor").health <= 0:
+			for enemy in self.get_children():
+				if enemy.get_class() == "GrineerLancer" || enemy.get_class() == "GrineerBombard":
+					enemy.queue_free()
+
 			if !boss_killed.playing:
 				lowtus.visible = true
 				boss_killed.play()
@@ -77,8 +81,8 @@ func _free_entities():
 		if projectile.get_class() == "Bullet" || projectile.get_class() == "HomingMissile":
 			projectile.queue_free()
 
-#	for wisp in self.get_node("Wisps").get_children():
-#		wisp.queue_free()
+	for wisp in self.get_node("Wisps").get_children():
+		wisp.queue_free()
 
 	for grineer in self.get_node("Grineers").get_children():
 		grineer.queue_free()
@@ -182,7 +186,7 @@ func _on_Door3_body_entered(body):
 		_free_entities()
 		distortion_intro.stop()
 		distortion_loop.stop()
-		_set_camera_limit(4384, 1824, 5184, 2240)
+		_set_camera_limit(4384, 1856, 5184, 2240)
 		excalibur.global_position = Vector2(4496, 2192)
 
 		detected.play()

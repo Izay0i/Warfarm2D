@@ -3,6 +3,7 @@ extends KinematicBody2D
 #signal grounded_updated(is_grounded)
 
 const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
+const CRYSTAL_SPIKE = preload("res://assets/scenes/tileset/CrystalSpike.tscn")
 
 const DEBUG = true
 
@@ -21,6 +22,7 @@ onready var bullet_position = $Position2D
 onready var timer = $Timer
 onready var recharge_timer = $RechargeTimer
 onready var raycast = $RayCast2D
+onready var test_for_spike = $TestForSpike
 onready var camera = $Camera2D
 onready var sword_sfx = $SwordSFX
 onready var hurt_sfx = $HurtSFX
@@ -31,7 +33,6 @@ onready var screen_shake = $Camera2D/ScreenShake
 var gravity
 var max_jump_velocity
 var min_jump_velocity
-var platform_velocity = 0
 
 var rng = RandomNumberGenerator.new()
 
@@ -41,6 +42,7 @@ var velocity = Vector2.ZERO
 var jump_count = 0
 var on_ground = false
 var can_move = false
+var is_on_spike = false
 var is_special_move = false
 var is_facing_right = true
 var is_grounded
@@ -66,13 +68,12 @@ func _teleport(pos):
 	self.global_position = pos
 
 func _take_damage(damage):
+	hurt_sfx.play()
 	recharge_timer.start()
 	if shield > 0:
 		shield -= damage
 	else:
 		health -= damage
-
-	print("Shield: %d Health: %d" % [shield, health])
 
 #shield and health
 func _handle_status():
@@ -113,6 +114,7 @@ func _handle_direction():
 	if move_direction != 0:
 		animated_sprite.scale.x = move_direction
 		sword_hitbox.scale.x = move_direction
+		test_for_spike.scale.y = move_direction
 
 func _handle_movement():
 	if can_move:
@@ -135,7 +137,7 @@ func _handle_jumping():
 	if Input.is_action_just_pressed("jump"):
 		if jump_count < MAX_JUMPS:
 			jump_count += 1
-			velocity.y = min_jump_velocity - platform_velocity
+			velocity.y = min_jump_velocity
 			on_ground = false
 
 #func _handle_shooting():
@@ -183,6 +185,15 @@ func _ready():
 		camera.current = true
 
 func _physics_process(delta):
+	if is_on_spike:
+		_take_damage(10)
+
+	if test_for_spike.is_colliding():
+		if test_for_spike.get_collider().name == "CrystalSpike":
+			is_on_spike = true
+		else:
+			is_on_spike = false
+
 	_handle_status()
 	_get_input()
 	_apply_gravity(delta)
@@ -207,29 +218,24 @@ func _on_Area2D_area_entered(area):
 
 	rng.randomize()
 	if area.get_class() == "HomingMissile":
-		_take_damage(100 + rng.randi_range(-3, 10))
+		_take_damage(200 + rng.randi_range(-3, 10))
 		screen_shake.start()
-		hurt_sfx.play()
 		return
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
 		_take_damage(85 + rng.randi_range(-2, 2))
-		hurt_sfx.play()
 		return
 
 	if area.get_parent().get_parent().get_class() == "Wisp":
 		_take_damage(65 + rng.randi_range(-2, 2))
-		hurt_sfx.play()
 		return
 
 	if area.name == "BatonHitbox":
 		_take_damage(70 + rng.randi_range(5, 15))
-		hurt_sfx.play()
 		return
 
 	if area.get_parent().get_class() == "Flamethrower":
 		_take_damage(MAX_HEALTH * 0.45)
-		hurt_sfx.play()
 		return
 
 func _on_SwordSFX_finished():
@@ -237,11 +243,11 @@ func _on_SwordSFX_finished():
 
 func _on_Area2D_body_entered(body):
 	if body.name == "CrystalSpike":
-		_take_damage(MAX_HEALTH * 0.5)
-		hurt_sfx.play()
+		is_on_spike = true
 
-	if body.get_parent().get_class() == "Elevator":
-		platform_velocity = body.get_floor_velocity().y
+func _on_Area2D_body_exited(body):
+	if body.name == "CrystalSpike":
+		is_on_spike = false
 
 func _on_SwordHit_body_entered(_body):
 	sword_sfx.play()
@@ -250,3 +256,4 @@ func _on_SwordHit_body_entered(_body):
 func _on_SwordHit_area_entered(area):
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
 		area.queue_free()
+		sword_sfx.play()
