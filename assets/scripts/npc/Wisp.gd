@@ -25,4 +25,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func _on_Area2D_area_entered(area):
 	if area.name == "SwordHit":
-		health -= 30 + rng.randi_range(-3, 4)
+		#health -= 30 + rng.randi_range(-3, 4)
+		pass

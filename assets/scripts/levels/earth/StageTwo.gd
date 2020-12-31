@@ -43,14 +43,24 @@ func _set_camera_limit(left, top, right, bottom):
 	excalibur.camera.limit_bottom = bottom
 
 func _ready():
+	Global.current_stage = self.name
+	Global.save_config()
+
+	if !Global.music_on:
+		distortion_intro.stream_paused = true
+
 	_set_camera_limit(80, 0, 896, 672)
 
-func _physics_process(_delta):
-	if victory.playing:
-		bossfight_intro.stop()
-		if bossfight_loop.playing:
-			bossfight_loop.stop()
+	if Global.spawn_point != Vector2(-1, -1):
+		excalibur.global_position = Global.spawn_point
+		planet_bg.visible = false
+		bg_1.visible = true
+		bg_2.visible = true
+		bg_3.visible = true
+		bg_4.visible = true
+		bg_5.visible = true
 
+func _physics_process(_delta):
 	if has_node("CaptainVor"):
 		if !get_node("CaptainVor").cut_scene:
 			excalibur.camera.current = true
@@ -183,9 +193,12 @@ func _on_Door2_body_entered(body):
 #Boss door
 func _on_Door3_body_entered(body):
 	if body.name == "Excalibur":
+		Global.spawn_point = Vector2(4096, 3200)
+		Global.save_config()
+
 		_free_entities()
-		distortion_intro.stop()
-		distortion_loop.stop()
+		distortion_intro.stream_paused = true
+		distortion_loop.stream_paused = true
 		_set_camera_limit(4384, 1856, 5184, 2240)
 		excalibur.global_position = Vector2(4496, 2192)
 
@@ -203,6 +216,9 @@ func _on_Despawner2_body_entered(body):
 
 func _on_LisetArea_body_entered(body):
 	if body.name == "Excalibur":
+		Global.spawn_point = Vector2(-1, -1)
+		Global.save_config()
+
 		if get_tree().change_scene("res://assets/scenes/misc/EndScreen.tscn") != OK:
 			print("Failed to change to end screen")
 
@@ -218,7 +234,9 @@ func _on_Intro_finished():
 
 func _on_Detected_finished():
 	lowtus.visible = false
-	bossfight_intro.play()
+
+	if Global.music_on:
+		bossfight_intro.play()
 
 	var vor = VOR_SCENE.instance()
 	vor.global_position = Vector2(4784, 2048)
@@ -229,7 +247,12 @@ func _on_Detected_finished():
 func _on_BossKilled_finished():
 	lowtus.visible = false
 	gate.queue_free()
-	victory.play()
+
+	if Global.music_on:
+		victory.play()
+
+	bossfight_intro.stream_paused = true
+	bossfight_loop.stream_paused = true
 
 func _on_BossfightIntro_finished():
 	if !bossfight_loop.playing:

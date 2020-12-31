@@ -23,6 +23,9 @@ func _on_ResumeButton_pressed():
 	visible = !visible
 
 func _on_ExitButton_pressed():
+	Global.spawn_point = Vector2(-1, -1)
+	Global.save_config()
+
 	get_tree().paused = !get_tree().paused
 	if get_tree().change_scene("res://assets/scenes/misc/TitleScreen.tscn") != OK:
 		print("Failed to change to title screen")

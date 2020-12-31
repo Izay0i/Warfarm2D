@@ -15,7 +15,7 @@ onready var bombard = $Bombard
 onready var health_display = $HealthDisplay
 
 const GRAVITY = 10
-const SPEED = 100
+const SPEED = 50
 
 var rng = RandomNumberGenerator.new()
 

@@ -108,6 +108,13 @@ func _play_ending():
 				dialog_label.text = "All targets eliminated.\nLet's get out of here."
 
 func _ready():
+	Global.current_stage = self.name
+	Global.spawn_point = Vector2(-1, -1)
+	Global.save_config()
+
+	if !Global.music_on:
+		bg_ambience.stream_paused = true
+
 	call_deferred("_free_entities")
 	call_deferred("_spawn_lancers")
 	call_deferred("_spawn_bombards")
@@ -124,6 +131,9 @@ func _on_Intro_finished():
 	lowtus.visible = false
 
 func _on_Ending_finished():
+	Global.tutorial_finished = true
+	Global.save_config()
+
 	lowtus.visible = false
 	grineer_ship.enable_collision()
 	grineer_ship.animated_sprite.play("hover")

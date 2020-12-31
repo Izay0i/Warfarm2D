@@ -3,7 +3,6 @@ extends KinematicBody2D
 #signal grounded_updated(is_grounded)
 
 const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
-const CRYSTAL_SPIKE = preload("res://assets/scenes/tileset/CrystalSpike.tscn")
 
 const DEBUG = true
 
@@ -181,18 +180,9 @@ func _ready():
 	
 	_reset_timer()
 
-	if get_parent().name != "StageOne":
-		camera.current = true
-
 func _physics_process(delta):
-	if is_on_spike:
+	if is_on_spike || (test_for_spike.is_colliding() && test_for_spike.get_collider().name == "CrystalSpike"):
 		_take_damage(10)
-
-	if test_for_spike.is_colliding():
-		if test_for_spike.get_collider().name == "CrystalSpike":
-			is_on_spike = true
-		else:
-			is_on_spike = false
 
 	_handle_status()
 	_get_input()
@@ -223,15 +213,15 @@ func _on_Area2D_area_entered(area):
 		return
 
 	if area.get_class() == "Bullet" && area.get_tag() == "LANCER":
-		_take_damage(85 + rng.randi_range(-2, 2))
+		_take_damage(80 + rng.randi_range(-2, 2))
 		return
 
 	if area.get_parent().get_parent().get_class() == "Wisp":
-		_take_damage(65 + rng.randi_range(-2, 2))
+		_take_damage(85 + rng.randi_range(-2, 2))
 		return
 
 	if area.name == "BatonHitbox":
-		_take_damage(70 + rng.randi_range(5, 15))
+		_take_damage(125 + rng.randi_range(5, 15))
 		return
 
 	if area.get_parent().get_class() == "Flamethrower":

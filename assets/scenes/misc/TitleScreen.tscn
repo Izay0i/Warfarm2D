@@ -11,54 +11,57 @@
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = 1280.0
-margin_bottom = 720.0
+[node name="Title" type="TextureRect" parent="."]
+margin_left = 96.0
+margin_top = -32.0
+margin_right = 1220.0
+margin_bottom = 505.0
+texture = ExtResource( 2 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 78.0
-margin_right = 1202.0
-margin_bottom = 747.0
-size_flags_horizontal = 4
-custom_constants/separation = -50
+[node name="MusicOn" type="CheckButton" parent="."]
+margin_left = 744.0
+margin_top = 528.0
+margin_right = 885.0
+margin_bottom = 568.0
+text = "MUSIC ON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
-margin_right = 1124.0
-margin_bottom = 537.0
-texture = ExtResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_left = 498.0
-margin_top = 487.0
-margin_right = 626.0
-margin_bottom = 747.0
-size_flags_horizontal = 4
-
-[node name="StartButton" type="TextureButton" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-margin_right = 128.0
-margin_bottom = 128.0
+[node name="StartButton" type="TextureButton" parent="."]
+margin_left = 576.0
+margin_top = 488.0
+margin_right = 704.0
+margin_bottom = 616.0
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 7 )
 
-[node name="ExitButton" type="TextureButton" parent="MarginContainer/VBoxContainer/VBoxContainer"]
-margin_top = 132.0
-margin_right = 128.0
-margin_bottom = 260.0
+[node name="ExitButton" type="TextureButton" parent="."]
+margin_left = 576.0
+margin_top = 592.0
+margin_right = 704.0
+margin_bottom = 720.0
 texture_normal = ExtResource( 4 )
 texture_hover = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="MusicOn" to="." method="_on_MusicOn_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
