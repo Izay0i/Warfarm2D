@@ -17,6 +17,6 @@
 - [Fire Column Pixel Art Effect - sanctumpixel](https://sanctumpixel.itch.io/fire-column-pixel-art-effect)
 - [Jungle Asset Pack - Jesse Muguia](https://jesse-m.itch.io/jungle-pack)
 - [Dark Halls Tileset - Enjl](https://enjl.itch.io/tileset-dark-halls)
-- The people at DE for creating a wonderful game :)
+- The people at DE for creating this wonderful game :)
 
 Welcome to the ricefields.
