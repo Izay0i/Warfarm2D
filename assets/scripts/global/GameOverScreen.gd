@@ -14,12 +14,8 @@ func _physics_process(_delta):
 		exit_button.grab_focus()
 
 func _on_ContinueButton_pressed():
-	if Global.current_stage == "StageOne":
-		if get_tree().change_scene("res://assets/scenes/levels/earth/StageOne.tscn") != OK:
-			print("Failed to change to stage one")
-	elif Global.current_stage == "StageTwo":
-		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
-			print("Failed to change to stage two")
+	if get_tree().change_scene(Global.current_stage) != OK:
+			print("Failed to change to current stage")
 
 func _on_ExitButton_pressed():
 	Global.spawn_point = Vector2(-1, -1)

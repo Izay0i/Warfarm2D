@@ -11,9 +11,14 @@ onready var animation_player = $AnimatedSprite/AnimationPlayer
 onready var force_field = $ForceField
 onready var baton_hitbox = $BatonHitbox
 onready var melee_range = $MeleeRange
+#Why not a raycast? You can't change the width of a raycast manually
+onready var detection_area = $DetectionArea
 onready var raycast = $RayCast2D
 
+#sounds
 onready var intro = $Intro
+onready var ready_laser = $ReadyLaser
+onready var laser_loop = $LaserLoop
 onready var baton_sfx = $BatonSFX
 onready var force_field_sfx = $ForceFieldSFX
 onready var hurt_stx = $HurtSFX
@@ -21,8 +26,14 @@ onready var death_sfx = $DeathSFX
 
 onready var camera = $Camera2D
 
+onready var laser_particle = $LaserBeamParticle
+onready var laser = $Laser
+onready var laser_hitbox = $LaserHitbox
+onready var laser_hitbox_collision = $LaserHitbox/CollisionShape2D
+
 onready var intro_timer = $IntroTimer
 onready var spawn_timer = $SpawnTimer
+onready var charge_up_timer = $ChargeUpTimer
 onready var death_timer = $DeathTimer
 
 onready var boss_bar = $CanvasLayer/BossBar
@@ -33,7 +44,7 @@ const SPEED = 200
 
 var rng = RandomNumberGenerator.new()
 
-var shield_health = 350
+var shield_health = 1000
 var health = 1000
 var velocity = Vector2.ZERO
 var normal = -1
@@ -49,6 +60,18 @@ func _spawn_entity(array):
 	var entity = array.front()
 	entity.global_position = self.global_position
 	get_parent().add_child(entity)
+
+func _flip_properties():
+	normal *= -1
+	raycast.position.x *= -1
+	baton_hitbox.position.x *= -1
+	melee_range.position.x *= -1
+	detection_area.position.x *= -1
+	laser_hitbox.position.x *= -1
+	laser_particle.position.x *= -1
+	laser.rect_position.x *= -1
+	laser.rect_scale.x = normal
+	animated_sprite.scale.x = -normal * 2
 
 func _take_damage(damage):
 	if !cut_scene:
@@ -72,7 +95,7 @@ func _handle_status():
 			death_sfx.play()
 
 func _handle_movement():
-	if cut_scene || is_player_in_melee_range || health <= 0:
+	if force_field.visible || charge_up_timer.time_left > 0.0 || is_player_in_melee_range || health <= 0:
 		velocity.x = 0
 	else:
 		velocity.x = SPEED * normal
@@ -81,11 +104,7 @@ func _handle_movement():
 	velocity = move_and_slide(velocity, Vector2.UP, true)
 
 	if is_on_wall():
-		normal *= -1
-		raycast.position.x *= -1
-		baton_hitbox.position.x *= -1
-		melee_range.position.x *= -1
-		animated_sprite.scale.x = -normal * 2
+		_flip_properties()
 
 func _ready():
 	health_bar.max_value = health
@@ -101,6 +120,29 @@ func _physics_process(_delta):
 		intro.play()
 
 	health_bar.value = health
+
+	if force_field.visible:
+		if charge_up_timer.is_stopped():
+			charge_up_timer.start()
+
+	if charge_up_timer.time_left > 8.0 && charge_up_timer.time_left <= 10.0:
+		if !ready_laser.playing:
+			ready_laser.play()
+
+		laser_particle.emitting = true
+	if charge_up_timer.time_left > 1.0 && charge_up_timer.time_left <= 8.0:
+		if !laser_loop.playing:
+			laser_loop.play()
+
+		laser_hitbox_collision.disabled = false
+		laser_particle.emitting = false
+		laser.visible = true
+		if laser.value < laser.max_value:
+			laser.value += 10
+	else:
+		laser_hitbox_collision.disabled = true
+		laser.visible = false
+		laser.value = 5
 
 	_handle_status()
 	_handle_movement()
@@ -123,6 +165,11 @@ func _on_MeleeRange_body_entered(body):
 func _on_MeleeRange_body_exited(body):
 	if body.name == "Excalibur":
 		is_player_in_melee_range = false
+
+func _on_DetectionArea_body_entered(body):
+	if body.name == "Excalibur":
+		if charge_up_timer.time_left > 8.0 || !force_field.visible:
+			_flip_properties()
 
 func _on_CollisionArea_area_entered(area):
 	if area.name == "SwordHit":

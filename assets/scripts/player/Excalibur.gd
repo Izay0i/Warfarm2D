@@ -4,7 +4,7 @@ extends KinematicBody2D
 
 const BULLET_SCENE = preload("res://assets/scenes/misc/Bullet.tscn")
 
-const DEBUG = true
+const DEBUG = false
 
 const MAX_HEALTH = 300
 const MAX_SHIELD = 300
@@ -42,6 +42,7 @@ var jump_count = 0
 var on_ground = false
 var can_move = false
 var is_on_spike = false
+var is_in_laser = false
 var is_special_move = false
 var is_facing_right = true
 var is_grounded
@@ -181,6 +182,9 @@ func _ready():
 	_reset_timer()
 
 func _physics_process(delta):
+	if is_in_laser:
+		_take_damage(20)
+
 	if is_on_spike || (test_for_spike.is_colliding() && test_for_spike.get_collider().name == "CrystalSpike"):
 		_take_damage(10)
 
@@ -221,12 +225,21 @@ func _on_Area2D_area_entered(area):
 		return
 
 	if area.name == "BatonHitbox":
-		_take_damage(125 + rng.randi_range(5, 15))
+		_take_damage(50 + rng.randi_range(5, 15))
+		velocity.y -= 512
+		return
+
+	if area.name == "LaserHitbox":
+		is_in_laser = true
 		return
 
 	if area.get_parent().get_class() == "Flamethrower":
 		_take_damage(MAX_HEALTH * 0.45)
 		return
+
+func _on_Area2D_area_exited(area):
+	if area.name == "LaserHitbox":
+		is_in_laser = false
 
 func _on_SwordSFX_finished():
 	sound_has_played = true

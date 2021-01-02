@@ -43,7 +43,7 @@ func _set_camera_limit(left, top, right, bottom):
 	excalibur.camera.limit_bottom = bottom
 
 func _ready():
-	Global.current_stage = self.name
+	Global.current_stage = self.filename
 	Global.save_config()
 
 	if !Global.music_on:
@@ -62,10 +62,14 @@ func _ready():
 
 func _physics_process(_delta):
 	if has_node("CaptainVor"):
-		if !get_node("CaptainVor").cut_scene:
+		var vor = get_node("CaptainVor")
+		if !vor.cut_scene:
 			excalibur.camera.current = true
 
-		if get_node("CaptainVor").health <= 0:
+		if vor.charge_up_timer.time_left > 1.0 && vor.charge_up_timer.time_left <= 8.0:
+			excalibur.screen_shake.start()
+
+		if vor.health <= 0:
 			for enemy in self.get_children():
 				if enemy.get_class() == "GrineerLancer" || enemy.get_class() == "GrineerBombard":
 					enemy.queue_free()

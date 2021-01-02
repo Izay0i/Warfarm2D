@@ -108,7 +108,7 @@ func _play_ending():
 				dialog_label.text = "All targets eliminated.\nLet's get out of here."
 
 func _ready():
-	Global.current_stage = self.name
+	Global.current_stage = self.filename
 	Global.spawn_point = Vector2(-1, -1)
 	Global.save_config()
 
