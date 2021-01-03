@@ -500,7 +500,6 @@ __meta__ = {
 position = Vector2( 32, 32 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DialogLabel" type="Label" parent="CanvasLayer/Lowtus"]
@@ -744,7 +743,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp" index="0"]
 animation = "yellow"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp" index="1"]
 autoplay = "vertical"
@@ -763,7 +762,7 @@ position = Vector2( 2832, 1672 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp2" index="0"]
 animation = "red"
-frame = 3
+frame = 2
 
 [node name="AnimationPlayer" parent="Wisps/Wisp2" index="1"]
 autoplay = "horizontal"
@@ -781,7 +780,7 @@ visible = false
 position = Vector2( 3928, 1712 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp3" index="0"]
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp3" index="1"]
 autoplay = "zigzag"
@@ -800,7 +799,7 @@ position = Vector2( 3912, 2528 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp4" index="0"]
 animation = "red"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp4" index="1"]
 autoplay = "horizontal"
@@ -820,7 +819,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp5" index="0"]
 animation = "red"
-frame = 3
+frame = 2
 
 [node name="AnimationPlayer" parent="Wisps/Wisp5" index="1"]
 autoplay = "horizontal"
@@ -838,7 +837,7 @@ visible = false
 position = Vector2( 1088, 2888 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp6" index="0"]
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp6" index="1"]
 autoplay = "circle"
@@ -857,7 +856,7 @@ position = Vector2( 3464, 2528 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp7" index="0"]
 animation = "red"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp7" index="1"]
 autoplay = "horizontal"
@@ -875,7 +874,7 @@ visible = false
 position = Vector2( 2352, 2296 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp8" index="0"]
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp8" index="1"]
 autoplay = "zigzag"
@@ -894,7 +893,7 @@ position = Vector2( 4016, 2736 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp9" index="0"]
 animation = "red"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp9" index="1"]
 autoplay = "horizontal"
@@ -913,7 +912,7 @@ position = Vector2( 3024, 2000 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp10" index="0"]
 animation = "yellow"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp10" index="1"]
 autoplay = "vertical"
@@ -931,7 +930,7 @@ visible = false
 position = Vector2( 3640, 1408 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp11" index="0"]
-frame = 5
+frame = 4
 
 [node name="AnimationPlayer" parent="Wisps/Wisp11" index="1"]
 autoplay = "circle"
@@ -949,7 +948,7 @@ visible = false
 position = Vector2( 4880, 3136 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp12" index="0"]
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp12" index="1"]
 autoplay = "zigzag"
@@ -969,7 +968,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp13" index="0"]
 animation = "yellow"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp13" index="1"]
 autoplay = "vertical"
@@ -990,7 +989,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp14" index="0"]
 animation = "red"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp14" index="1"]
 autoplay = "horizontal"
@@ -1010,7 +1009,7 @@ position = Vector2( 6128, 2800 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp15" index="0"]
 animation = "purple"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp15" index="1"]
 autoplay = "circle"
@@ -1030,7 +1029,7 @@ position = Vector2( 2032, 2488 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp16" index="0"]
 animation = "red"
-frame = 1
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp16" index="1"]
 autoplay = "horizontal"
@@ -1051,7 +1050,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp17" index="0"]
 animation = "red"
-frame = 3
+frame = 2
 
 [node name="AnimationPlayer" parent="Wisps/Wisp17" index="1"]
 autoplay = "horizontal"
@@ -1276,7 +1275,6 @@ __meta__ = {
 position = Vector2( 40, -8 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 30 )
-frame = 1
 playing = true
 
 [node name="LisetArea" type="Area2D" parent="Liset"]

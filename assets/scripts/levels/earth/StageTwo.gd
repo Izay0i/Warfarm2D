@@ -67,7 +67,7 @@ func _physics_process(_delta):
 			excalibur.camera.current = true
 
 		if vor.charge_up_timer.time_left > 1.0 && vor.charge_up_timer.time_left <= 8.0:
-			excalibur.screen_shake.start()
+			excalibur.screen_shake.start(0.1, 20, 15)
 
 		if vor.health <= 0:
 			for enemy in self.get_children():
