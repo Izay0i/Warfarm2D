@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/scenes/misc/GrineerShip.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/tileset/EarthTile.tscn" type="PackedScene" id=2]
@@ -48,6 +48,12 @@ extents = Vector2( 320, 72 )
 extents = Vector2( 288, 56 )
 
 [sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 120, 10 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 32, 103 )
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 16, 48 )
 
 [node name="StageOne" type="Node"]
@@ -139,7 +145,6 @@ __meta__ = {
 position = Vector2( 56, 220 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DialogLabel" type="Label" parent="CanvasLayer/Lowtus"]
@@ -325,8 +330,26 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/FallArea3"]
 shape = SubResource( 6 )
 
+[node name="DJNotifierArea" type="Area2D" parent="FallAreas"]
+position = Vector2( 2352, 640 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/DJNotifierArea"]
+shape = SubResource( 7 )
+
 [node name="TargetDummy" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1520, 552 )
+
+[node name="DjNotifierDisableArea" type="Area2D" parent="."]
+position = Vector2( 2496, 352 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DjNotifierDisableArea"]
+shape = SubResource( 9 )
 
 [node name="TriggerStart" type="Area2D" parent="."]
 position = Vector2( 2952, 400 )
@@ -335,10 +358,12 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerStart"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 [connection signal="finished" from="CanvasLayer/Lowtus/Intro" to="." method="_on_Intro_finished"]
 [connection signal="finished" from="CanvasLayer/Lowtus/Ending" to="." method="_on_Ending_finished"]
 [connection signal="body_entered" from="FallAreas/FallArea1" to="." method="_on_FallArea1_body_entered"]
 [connection signal="body_entered" from="FallAreas/FallArea2" to="." method="_on_FallArea2_body_entered"]
 [connection signal="body_entered" from="FallAreas/FallArea3" to="." method="_on_FallArea3_body_entered"]
+[connection signal="body_entered" from="FallAreas/DJNotifierArea" to="." method="_on_DJNotifierArea_body_entered"]
+[connection signal="body_entered" from="DjNotifierDisableArea" to="." method="_on_DjNotifierDisableArea_body_entered"]
 [connection signal="body_entered" from="TriggerStart" to="." method="_on_TriggerStart_body_entered"]

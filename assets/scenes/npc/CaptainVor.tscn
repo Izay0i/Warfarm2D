@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/scripts/npc/VorStateMachine.gd" type="Script" id=8]
 [ext_resource path="res://assets/textures/npc/boss/captain_vor/force_field.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/miscs/health/barHorizontal_red.png" type="Texture" id=10]
-[ext_resource path="res://assets/sounds/bossfight/foolish_tenno.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/bossfight/foolishness_tenno_foolishness.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/textures/miscs/health/barHorizontal_under.png" type="Texture" id=12]
 [ext_resource path="res://assets/sounds/player/weapons/sword_did_not_hit_anything.ogg" type="AudioStream" id=13]
 [ext_resource path="res://assets/textures/npc/boss/captain_vor/laser_beam.png" type="Texture" id=14]
@@ -39,67 +39,67 @@ region = Rect2( 32, 0, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=34]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=35]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 4 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 4 )
-region = Rect2( 224, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 3 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=41]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 18 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=42]
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 4 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 4 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 4 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=21]
 animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": true,
@@ -111,28 +111,28 @@ animations = [ {
 "name": "walk",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": false,
 "name": "charge_start",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": true,
-"name": "attack",
-"speed": 12.0
+"frames": [ SubResource( 10 ) ],
+"loop": false,
+"name": "defeat",
+"speed": 5.0
 }, {
-"frames": [ SubResource( 18 ), SubResource( 19 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "charge_loop",
 "speed": 15.0
 }, {
-"frames": [ SubResource( 41 ) ],
-"loop": false,
-"name": "defeat",
-"speed": 5.0
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "attack",
+"speed": 12.0
 } ]
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=22]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -171,23 +171,23 @@ tracks/2/keys = {
 "values": [ "attack" ]
 }
 
-[sub_resource type="CapsuleShape2D" id=44]
+[sub_resource type="CapsuleShape2D" id=23]
 radius = 16.0
 height = 32.0
 
-[sub_resource type="RectangleShape2D" id=45]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 16, 32 )
 
-[sub_resource type="RectangleShape2D" id=46]
+[sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 48, 48 )
 
-[sub_resource type="RectangleShape2D" id=47]
+[sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 16, 32 )
 
-[sub_resource type="RectangleShape2D" id=48]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 16, 32 )
 
-[sub_resource type="RectangleShape2D" id=49]
+[sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 48, 32 )
 
 [sub_resource type="Curve" id=29]
@@ -196,7 +196,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.629546 ), 0.0, 0.0, 0, 
 [sub_resource type="CurveTexture" id=30]
 curve = SubResource( 29 )
 
-[sub_resource type="ParticlesMaterial" id=50]
+[sub_resource type="ParticlesMaterial" id=31]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -222,16 +222,16 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
-frames = SubResource( 42 )
+frames = SubResource( 21 )
 animation = "idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
 playback_process_mode = 0
 playback_speed = 2.0
-anims/melee = SubResource( 43 )
+anims/melee = SubResource( 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 44 )
+shape = SubResource( 23 )
 
 [node name="CollisionArea" type="Area2D" parent="."]
 __meta__ = {
@@ -239,7 +239,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
-shape = SubResource( 45 )
+shape = SubResource( 24 )
 
 [node name="ForceField" type="Area2D" parent="."]
 visible = false
@@ -248,7 +248,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForceField"]
-shape = SubResource( 46 )
+shape = SubResource( 25 )
 
 [node name="Sprite" type="Sprite" parent="ForceField"]
 scale = Vector2( 3, 3 )
@@ -261,7 +261,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatonHitbox"]
-shape = SubResource( 47 )
+shape = SubResource( 26 )
 disabled = true
 
 [node name="MeleeRange" type="Area2D" parent="."]
@@ -271,7 +271,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeRange"]
-shape = SubResource( 48 )
+shape = SubResource( 27 )
 
 [node name="DetectionArea" type="Area2D" parent="."]
 position = Vector2( 152, 0 )
@@ -280,7 +280,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource( 49 )
+shape = SubResource( 28 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -379,7 +379,7 @@ position = Vector2( -28, -5 )
 emitting = false
 amount = 30
 local_coords = false
-process_material = SubResource( 50 )
+process_material = SubResource( 31 )
 
 [node name="Laser" type="TextureProgress" parent="."]
 visible = false

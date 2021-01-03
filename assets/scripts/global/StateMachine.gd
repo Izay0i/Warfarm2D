@@ -35,7 +35,7 @@ func _animate():
 func _physics_process(_delta):
 	match state:
 		IDLE:
-			#possible states: run, jump, fall, slide, melee, shoot
+			#possible states: run, jump, fall,  melee
 			if parent.move_direction != 0:
 				state = RUN
 			elif !parent.raycast.is_colliding():
@@ -43,14 +43,14 @@ func _physics_process(_delta):
 					state = JUMP
 				elif parent.velocity.y > 0:
 					state = FALL
-			elif Input.is_action_pressed("melee"):
+			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
 #			elif Input.is_action_pressed("shoot"):
 #				parent.is_special_move = true
 #				state = SHOOT
 		RUN:
-			#possible states: idle, jump, fall
+			#possible states: idle, jump, fall, melee
 			if parent.move_direction == 0:
 				state = IDLE
 			elif !parent.raycast.is_colliding():
@@ -58,29 +58,29 @@ func _physics_process(_delta):
 					state = JUMP
 				elif parent.velocity.y > 0:
 					state = FALL
-			elif Input.is_action_pressed("melee"):
+			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
 		JUMP:
-			#possible states: fall
+			#possible states: fall, melee
 			if parent.velocity.y > 0:
 				state = FALL
 			elif parent.is_on_floor(): #failsafe
 				state = IDLE
-			elif Input.is_action_pressed("melee"):
+			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
 		FALL:
-			#possible states: idle
+			#possible states: idle, jump, melee
 			if parent.is_on_floor():
 				state = IDLE
 			elif Input.is_action_just_pressed("jump"):
 				state = JUMP
-			elif Input.is_action_pressed("melee"):
+			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
 		MELEE:
-			#possible states: idle, fall
+			#possible states: idle
 			if !parent.is_special_move:
 				state = IDLE
 #		SHOOT:

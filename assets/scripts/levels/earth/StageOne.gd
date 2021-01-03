@@ -18,6 +18,7 @@ onready var tilemap = $TileMap
 onready var bg_ambience = $BackgroundAmbience
 onready var water_sfx = $WaterSFX
 onready var dj_text = $Guides/DoubleJumpText
+onready var dj_notifier_area = $FallAreas/DJNotifierArea/CollisionShape2D
 onready var congrats_text = $Guides/CongratsText
 
 var enemies_left = 0
@@ -145,8 +146,6 @@ func _on_FallArea1_body_entered(body):
 
 func _on_FallArea2_body_entered(body):
 	if body.name != "TileMap":
-		if body.name == "Excalibur":
-			dj_text.visible = true
 		body.global_position = Vector2(2048, 448)
 		water_sfx.play()
 
@@ -154,6 +153,14 @@ func _on_FallArea3_body_entered(body):
 	if body.name != "TileMap":
 		body.global_position = Vector2(4032, 512)
 		water_sfx.play()
+
+func _on_DJNotifierArea_body_entered(body):
+	if body.name == "Excalibur":
+		dj_text.visible = true
+
+func _on_DjNotifierDisableArea_body_entered(body):
+	if body.name == "Excalibur":
+		dj_notifier_area.set_deferred("disabled", true)
 
 func _on_TriggerStart_body_entered(body):
 	if body.name == "Excalibur":
