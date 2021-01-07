@@ -110,8 +110,6 @@ func _play_ending():
 
 func _ready():
 	Global.current_stage = self.filename
-	Global.spawn_point = Vector2(-1, -1)
-	Global.save_config()
 
 	if !Global.music_on:
 		bg_ambience.stream_paused = true
@@ -164,6 +162,14 @@ func _on_DjNotifierDisableArea_body_entered(body):
 
 func _on_TriggerStart_body_entered(body):
 	if body.name == "Excalibur":
+		Global.spawn_point = Vector2(2944, 400)
+		Global.save_config()
+
 		congrats_text.visible = false
 		body.controls_ui.visible = true
 		_play_intro()
+
+func _on_SpawnPointArea_body_entered(body):
+	if body.name == "Excalibur":
+		if Global.spawn_point != Vector2(-1, -1):
+			get_node("Excalibur").global_position = Global.spawn_point

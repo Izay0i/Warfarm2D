@@ -53,6 +53,7 @@ func _ready():
 
 	if Global.spawn_point != Vector2(-1, -1):
 		excalibur.global_position = Global.spawn_point
+
 		planet_bg.visible = false
 		bg_1.visible = true
 		bg_2.visible = true
