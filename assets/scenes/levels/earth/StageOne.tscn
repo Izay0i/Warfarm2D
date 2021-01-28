@@ -38,25 +38,25 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 296, 48 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 176, 40 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 320, 72 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 288, 56 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 120, 10 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 32, 103 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 16, 48 )
 
 [node name="StageOne" type="Node"]
@@ -148,7 +148,6 @@ __meta__ = {
 position = Vector2( 56, 220 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 3 )
-frame = 1
 playing = true
 
 [node name="DialogLabel" type="Label" parent="CanvasLayer/Lowtus"]
@@ -314,7 +313,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/SpawnPointArea"]
-shape = SubResource( 10 )
+shape = SubResource( 4 )
 
 [node name="FallArea1" type="Area2D" parent="FallAreas"]
 position = Vector2( 688, 760 )
@@ -323,7 +322,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/FallArea1"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="FallArea2" type="Area2D" parent="FallAreas"]
 position = Vector2( 2400, 728 )
@@ -332,7 +331,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/FallArea2"]
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="FallArea3" type="Area2D" parent="FallAreas"]
 position = Vector2( 4352, 744 )
@@ -341,7 +340,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/FallArea3"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="DJNotifierArea" type="Area2D" parent="FallAreas"]
 position = Vector2( 2352, 640 )
@@ -350,7 +349,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FallAreas/DJNotifierArea"]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="TargetDummy" parent="." instance=ExtResource( 20 )]
 position = Vector2( 1520, 552 )
@@ -362,7 +361,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DjNotifierDisableArea"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="TriggerStart" type="Area2D" parent="."]
 position = Vector2( 2952, 400 )
@@ -371,7 +370,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerStart"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 [connection signal="finished" from="CanvasLayer/Lowtus/Intro" to="." method="_on_Intro_finished"]
 [connection signal="finished" from="CanvasLayer/Lowtus/Ending" to="." method="_on_Ending_finished"]
 [connection signal="body_entered" from="FallAreas/SpawnPointArea" to="." method="_on_SpawnPointArea_body_entered"]

@@ -131,6 +131,7 @@ func _on_Intro_finished():
 
 func _on_Ending_finished():
 	Global.tutorial_finished = true
+	Global.spawn_point = Vector2(-1, -1)
 	Global.save_config()
 
 	lowtus.visible = false

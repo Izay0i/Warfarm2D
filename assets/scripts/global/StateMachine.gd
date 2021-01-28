@@ -14,6 +14,7 @@ enum {
 }
 
 var state = IDLE
+var anim = [ "melee", "melee_alt" ]
 
 func _animate():
 	match state:
@@ -30,7 +31,8 @@ func _animate():
 #				parent.animated_sprite.play("shoot")
 		MELEE:
 			if parent.is_special_move:
-				parent.animation_player.play("melee")
+				name = anim[0]
+				parent.animation_player.play(name)
 
 func _physics_process(_delta):
 	match state:
@@ -46,6 +48,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
+				anim.shuffle()
 #			elif Input.is_action_pressed("shoot"):
 #				parent.is_special_move = true
 #				state = SHOOT
@@ -61,6 +64,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
+				anim.shuffle()
 		JUMP:
 			#possible states: fall, melee
 			if parent.velocity.y > 0:
@@ -70,6 +74,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
+				anim.shuffle()
 		FALL:
 			#possible states: idle, jump, melee
 			if parent.is_on_floor():
@@ -79,6 +84,7 @@ func _physics_process(_delta):
 			elif Input.is_action_just_pressed("melee"):
 				parent.is_special_move = true
 				state = MELEE
+				anim.shuffle()
 		MELEE:
 			#possible states: idle
 			if !parent.is_special_move:
