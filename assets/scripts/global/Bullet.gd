@@ -34,7 +34,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	timer.start()
 
 func _on_Bullet_body_entered(body):
-	if (body.name == "Excalibur" && tag == "LANCER") || tag == "PLAYER":
+	if (body.name == "Excalibur" && tag == "LANCER") || tag == "PLAYER" || body.name == "Console":
 		$SFX.stop()
 		queue_free()
 

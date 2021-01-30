@@ -1,23 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/textures/miscs/health/barHorizontal_truered.png" type="Texture" id=1]
 [ext_resource path="res://assets/textures/miscs/health/barHorizontal_cyan.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/player/PlayerHealth.gd" type="Script" id=3]
 [ext_resource path="res://assets/textures/miscs/health/barHorizontal_under.png" type="Texture" id=4]
+[ext_resource path="res://assets/textures/player/excalibur/health.png" type="Texture" id=5]
+[ext_resource path="res://assets/textures/player/excalibur/shield.png" type="Texture" id=6]
 
 [node name="PlayerHealth" type="Node2D"]
 position = Vector2( 16, 80 )
 script = ExtResource( 3 )
-
-[node name="Label" type="Label" parent="."]
-margin_top = -64.0
-margin_right = 46.0
-margin_bottom = -50.0
-text = "Shield"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Shield" type="TextureProgress" parent="."]
 margin_top = -48.0
@@ -30,22 +22,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
-margin_top = -16.0
-margin_right = 42.0
-margin_bottom = -2.0
-text = "Health"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Health" type="TextureProgress" parent="."]
 margin_right = 200.0
 margin_bottom = 26.0
 value = 100.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShieldIcon" type="TextureRect" parent="."]
+margin_left = 208.0
+margin_top = -56.0
+margin_right = 248.0
+margin_bottom = -16.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthIcon" type="TextureRect" parent="."]
+margin_left = 208.0
+margin_top = -8.0
+margin_right = 248.0
+margin_bottom = 32.0
+texture = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

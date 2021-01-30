@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/We have successfully decoded the message. Head to extraction..ogg-70f946b9d01a4b35f56a220e8106c79f.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/voicelines/We have successfully decoded the message. Head to extraction..ogg"
+dest_files=[ "res://.import/We have successfully decoded the message. Head to extraction..ogg-70f946b9d01a4b35f56a220e8106c79f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

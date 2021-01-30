@@ -12,5 +12,5 @@ func disable_collision():
 
 func _on_ChangeSceneArea_body_entered(body):
 	if body.name == "Excalibur":
-		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
-			print("Failed to change to title screen")
+		if get_tree().change_scene("res://assets/scenes/levels/earth/StageOneUp.tscn") != OK:
+			print("Failed to change to next stage")

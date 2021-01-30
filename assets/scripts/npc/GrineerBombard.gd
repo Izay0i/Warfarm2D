@@ -25,7 +25,7 @@ var health = 500
 var velocity = Vector2.ZERO
 var normal = -1
 var is_enemy_spotted = false
-var active = false
+var active = true
 
 func get_class():
 	return "GrineerBombard"
@@ -50,7 +50,7 @@ func _find_target():
 	if units.size() > 0:
 		var closet = units[0]
 		for unit in units:
-			if unit.name == "Excalibur":
+			if unit.name == "Excalibur" || unit.name == "Console":
 				closet = unit
 #			if position.distance_to(unit.global_position) < position.distance_to(closet.global_position):
 #				closet = unit
@@ -71,10 +71,7 @@ func _handle_status():
 
 func _handle_movement():
 	if health > 0:
-		if is_enemy_spotted == false:
-			speed_mod = 1.0
-		else:
-			speed_mod = 0.5
+		if is_enemy_spotted:
 			if timer.is_stopped():
 				_shoot_missile()
 				_start_timer()
@@ -102,12 +99,18 @@ func _physics_process(_delta):
 		_handle_movement()
 
 func _on_DetectionArea_body_entered(body):
-	if body.name == "Excalibur":
+	if body.name == "Excalibur" || body.name == "Console":
 		is_enemy_spotted = true
 
+	if body.name == "Console":
+		speed_mod = 0
+	elif body.name == "Excalibur":
+		speed_mod = 0.5
+
 func _on_DetectionArea_body_exited(body):
-	if body.name == "Excalibur":
+	if body.name == "Excalibur" || body.name == "Console":
 		is_enemy_spotted = false
+	speed_mod = 1.0
 
 	if body == target:
 		target = null
@@ -140,7 +143,9 @@ func _on_DeathTimer_timeout():
 	queue_free()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	active = true
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+		active = true
 
 func _on_VisibilityNotifier2D_screen_exited():
-	active = false
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+		active = false

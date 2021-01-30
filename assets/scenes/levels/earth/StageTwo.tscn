@@ -1,7 +1,6 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://assets/scenes/tileset/DarkHalls.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/scenes/misc/GrineerShip.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/scenes/player/Excalibur.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/scripts/levels/earth/StageTwo.gd" type="Script" id=4]
 [ext_resource path="res://assets/scenes/misc/PurpleFire.tscn" type="PackedScene" id=5]
@@ -33,77 +32,101 @@
 [ext_resource path="res://assets/sounds/bossfight/bossfight_loop.ogg" type="AudioStream" id=31]
 [ext_resource path="res://assets/textures/miscs/liset.png" type="Texture" id=32]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 24 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 32 )
+region = Rect2( 0, 0, 64, 32 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 24 )
-region = Rect2( 32, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 32 )
+region = Rect2( 64, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 32 )
+region = Rect2( 128, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 32 )
+region = Rect2( 192, 0, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=61]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"frames": [ SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 24 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ SubResource( 30 ), SubResource( 31 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 1216, 32 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 64, 32 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=36]
 extents = Vector2( 32, 96 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 32, 48 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 64, 32 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 16, 8 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=40]
 extents = Vector2( 32, 80 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=41]
 extents = Vector2( 32, 64 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=42]
 extents = Vector2( 32, 96 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=43]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=44]
 extents = Vector2( 16, 32 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=45]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 24, 48 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=47]
 extents = Vector2( 24, 48 )
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=48]
 extents = Vector2( 24, 40 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=49]
 extents = Vector2( 24, 40 )
 
-[sub_resource type="RectangleShape2D" id=21]
+[sub_resource type="RectangleShape2D" id=50]
 extents = Vector2( 24, 40 )
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=51]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -131,7 +154,7 @@ tracks/1/keys = {
 "values": [ 0.1 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=52]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -159,7 +182,7 @@ tracks/1/keys = {
 "values": [ 0.5 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=53]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -187,7 +210,7 @@ tracks/1/keys = {
 "values": [ 0.3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=54]
 extents = Vector2( 32, 11 )
 
 [sub_resource type="AtlasTexture" id=26]
@@ -206,7 +229,7 @@ region = Rect2( 128, 0, 64, 32 )
 atlas = ExtResource( 32 )
 region = Rect2( 192, 0, 64, 32 )
 
-[sub_resource type="SpriteFrames" id=30]
+[sub_resource type="SpriteFrames" id=55]
 animations = [ {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
 "loop": true,
@@ -214,7 +237,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=56]
 extents = Vector2( 72, 128 )
 
 [node name="StageTwo" type="Node"]
@@ -290,8 +313,12 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 768, 284 )
 
-[node name="GrineerShip" parent="." instance=ExtResource( 2 )]
-position = Vector2( 248, 160 )
+[node name="LisetSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 248, 64 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 61 )
+frame = 2
+playing = true
 
 [node name="TileMap" parent="." instance=ExtResource( 1 )]
 cell_quadrant_size = 32
@@ -503,7 +530,8 @@ __meta__ = {
 [node name="LotusUI" type="AnimatedSprite" parent="CanvasLayer/Lowtus"]
 position = Vector2( 32, 32 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 3 )
+frames = SubResource( 32 )
+frame = 1
 playing = true
 
 [node name="DialogLabel" type="Label" parent="CanvasLayer/Lowtus"]
@@ -565,7 +593,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/TransitionToMain"]
 position = Vector2( 568, 144 )
-shape = SubResource( 4 )
+shape = SubResource( 33 )
 
 [node name="CamTransit1" type="Area2D" parent="CameraTransit"]
 position = Vector2( 1792, 1408 )
@@ -575,7 +603,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit1"]
 position = Vector2( 31.9999, 31.9999 )
-shape = SubResource( 5 )
+shape = SubResource( 34 )
 
 [node name="CamTransit2" type="Area2D" parent="CameraTransit"]
 position = Vector2( 192, 2432 )
@@ -585,7 +613,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit2"]
 position = Vector2( 64, 32 )
-shape = SubResource( 6 )
+shape = SubResource( 35 )
 
 [node name="CamTransit3" type="Area2D" parent="CameraTransit"]
 position = Vector2( 448, 2560 )
@@ -595,7 +623,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit3"]
 position = Vector2( 32, 96 )
-shape = SubResource( 7 )
+shape = SubResource( 36 )
 disabled = true
 
 [node name="CamTransit4" type="Area2D" parent="CameraTransit"]
@@ -606,7 +634,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit4"]
 position = Vector2( 31.9999, 48 )
-shape = SubResource( 8 )
+shape = SubResource( 37 )
 
 [node name="CamTransit5" type="Area2D" parent="CameraTransit"]
 position = Vector2( 1472, 2624 )
@@ -616,7 +644,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit5"]
 position = Vector2( 63.9999, 31.9998 )
-shape = SubResource( 9 )
+shape = SubResource( 38 )
 
 [node name="CamTransit6" type="Area2D" parent="CameraTransit"]
 position = Vector2( 864, 2816 )
@@ -626,7 +654,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit6"]
 position = Vector2( 15.9999, 47.9998 )
-shape = SubResource( 10 )
+shape = SubResource( 39 )
 
 [node name="CamTransit7" type="Area2D" parent="CameraTransit"]
 position = Vector2( 1920, 2528 )
@@ -636,7 +664,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit7"]
 position = Vector2( 31.9999, 80 )
-shape = SubResource( 11 )
+shape = SubResource( 40 )
 
 [node name="CamTransit8" type="Area2D" parent="CameraTransit"]
 position = Vector2( 2328, 2016 )
@@ -646,7 +674,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit8"]
 position = Vector2( 32, 63.9999 )
-shape = SubResource( 12 )
+shape = SubResource( 41 )
 
 [node name="CamTransit9" type="Area2D" parent="CameraTransit"]
 position = Vector2( 3200, 1344 )
@@ -656,7 +684,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit9"]
 position = Vector2( 31.9998, 95.9999 )
-shape = SubResource( 13 )
+shape = SubResource( 42 )
 
 [node name="CamTransit10" type="Area2D" parent="CameraTransit"]
 position = Vector2( 4256, 2176 )
@@ -666,7 +694,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit10"]
 position = Vector2( 32, 32 )
-shape = SubResource( 14 )
+shape = SubResource( 43 )
 
 [node name="CamTransit11" type="Area2D" parent="CameraTransit"]
 position = Vector2( 2304, 2432 )
@@ -676,7 +704,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit11"]
 position = Vector2( 16, 32 )
-shape = SubResource( 15 )
+shape = SubResource( 44 )
 
 [node name="CamTransit12" type="Area2D" parent="CameraTransit"]
 position = Vector2( 3936, 2944 )
@@ -686,7 +714,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit12"]
 position = Vector2( 31.9998, 31.9998 )
-shape = SubResource( 16 )
+shape = SubResource( 45 )
 
 [node name="CamTransit13" type="Area2D" parent="CameraTransit"]
 position = Vector2( 5184, 2112 )
@@ -696,7 +724,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit13"]
 position = Vector2( 23.9995, 48 )
-shape = SubResource( 17 )
+shape = SubResource( 46 )
 
 [node name="CamTransit14" type="Area2D" parent="CameraTransit"]
 position = Vector2( 5632, 2112 )
@@ -706,7 +734,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/CamTransit14"]
 position = Vector2( 23.9995, 48 )
-shape = SubResource( 18 )
+shape = SubResource( 47 )
 disabled = true
 
 [node name="Door1" type="Area2D" parent="CameraTransit"]
@@ -717,7 +745,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/Door1"]
 position = Vector2( 15.9998, 87.9999 )
-shape = SubResource( 19 )
+shape = SubResource( 48 )
 
 [node name="Door2" type="Area2D" parent="CameraTransit"]
 position = Vector2( 4096, 3200 )
@@ -727,7 +755,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/Door2"]
 position = Vector2( 16, 55.9998 )
-shape = SubResource( 20 )
+shape = SubResource( 49 )
 
 [node name="Door3" type="Area2D" parent="CameraTransit"]
 position = Vector2( 7008, 2560 )
@@ -737,7 +765,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraTransit/Door3"]
 position = Vector2( 15.9995, 88 )
-shape = SubResource( 21 )
+shape = SubResource( 50 )
 
 [node name="Wisps" type="Node2D" parent="."]
 
@@ -747,7 +775,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp" index="0"]
 animation = "yellow"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp" index="1"]
 autoplay = "vertical"
@@ -766,6 +794,7 @@ position = Vector2( 2832, 1672 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp2" index="0"]
 animation = "red"
+frame = 5
 
 [node name="AnimationPlayer" parent="Wisps/Wisp2" index="1"]
 autoplay = "horizontal"
@@ -783,7 +812,7 @@ visible = false
 position = Vector2( 3928, 1712 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp3" index="0"]
-frame = 5
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp3" index="1"]
 autoplay = "zigzag"
@@ -802,7 +831,7 @@ position = Vector2( 3912, 2528 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp4" index="0"]
 animation = "red"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp4" index="1"]
 autoplay = "horizontal"
@@ -822,6 +851,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp5" index="0"]
 animation = "red"
+frame = 5
 
 [node name="AnimationPlayer" parent="Wisps/Wisp5" index="1"]
 autoplay = "horizontal"
@@ -839,7 +869,7 @@ visible = false
 position = Vector2( 1088, 2888 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp6" index="0"]
-frame = 5
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp6" index="1"]
 autoplay = "circle"
@@ -858,7 +888,7 @@ position = Vector2( 3464, 2528 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp7" index="0"]
 animation = "red"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp7" index="1"]
 autoplay = "horizontal"
@@ -876,7 +906,7 @@ visible = false
 position = Vector2( 2352, 2296 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp8" index="0"]
-frame = 5
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp8" index="1"]
 autoplay = "zigzag"
@@ -895,7 +925,7 @@ position = Vector2( 4016, 2736 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp9" index="0"]
 animation = "red"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp9" index="1"]
 autoplay = "horizontal"
@@ -914,7 +944,7 @@ position = Vector2( 3024, 2000 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp10" index="0"]
 animation = "yellow"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp10" index="1"]
 autoplay = "vertical"
@@ -932,7 +962,7 @@ visible = false
 position = Vector2( 3640, 1408 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp11" index="0"]
-frame = 1
+frame = 4
 
 [node name="AnimationPlayer" parent="Wisps/Wisp11" index="1"]
 autoplay = "circle"
@@ -950,7 +980,7 @@ visible = false
 position = Vector2( 4880, 3136 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp12" index="0"]
-frame = 5
+frame = 0
 
 [node name="AnimationPlayer" parent="Wisps/Wisp12" index="1"]
 autoplay = "zigzag"
@@ -970,7 +1000,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp13" index="0"]
 animation = "yellow"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp13" index="1"]
 autoplay = "vertical"
@@ -991,7 +1021,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp14" index="0"]
 animation = "red"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp14" index="1"]
 autoplay = "horizontal"
@@ -1011,7 +1041,7 @@ position = Vector2( 6128, 2800 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp15" index="0"]
 animation = "purple"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp15" index="1"]
 autoplay = "circle"
@@ -1031,7 +1061,7 @@ position = Vector2( 2032, 2488 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp16" index="0"]
 animation = "red"
-frame = 5
+frame = 3
 
 [node name="AnimationPlayer" parent="Wisps/Wisp16" index="1"]
 autoplay = "horizontal"
@@ -1052,6 +1082,7 @@ scale = Vector2( -1, 1 )
 
 [node name="AnimatedSprite" parent="Wisps/Wisp17" index="0"]
 animation = "red"
+frame = 5
 
 [node name="AnimationPlayer" parent="Wisps/Wisp17" index="1"]
 autoplay = "horizontal"
@@ -1162,9 +1193,9 @@ visible = false
 
 [node name="AnimationPlayer" parent="Platforms/MovingPlatform2x9" index="2"]
 autoplay = "long_vertical"
-anims/horizontal = SubResource( 22 )
-anims/long_vertical = SubResource( 23 )
-anims/vertical = SubResource( 24 )
+anims/horizontal = SubResource( 51 )
+anims/long_vertical = SubResource( 52 )
+anims/vertical = SubResource( 53 )
 
 [node name="Vertical" parent="Platforms/MovingPlatform2x9" index="3"]
 visible = false
@@ -1230,7 +1261,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorSpawner/Spawner"]
-shape = SubResource( 25 )
+shape = SubResource( 54 )
 
 [node name="Spawner2" type="Area2D" parent="ElevatorSpawner"]
 position = Vector2( 2144, 2728 )
@@ -1239,7 +1270,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorSpawner/Spawner2"]
-shape = SubResource( 25 )
+shape = SubResource( 54 )
 
 [node name="Despawner" type="Area2D" parent="ElevatorSpawner"]
 position = Vector2( 736, 2232 )
@@ -1248,7 +1279,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorSpawner/Despawner"]
-shape = SubResource( 25 )
+shape = SubResource( 54 )
 
 [node name="Despawner2" type="Area2D" parent="ElevatorSpawner"]
 position = Vector2( 2144, 1944 )
@@ -1257,7 +1288,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorSpawner/Despawner2"]
-shape = SubResource( 25 )
+shape = SubResource( 54 )
 
 [node name="SpawnTimer" type="Timer" parent="ElevatorSpawner"]
 wait_time = 3.0
@@ -1275,8 +1306,8 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Liset"]
 position = Vector2( 40, -8 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 30 )
-frame = 2
+frames = SubResource( 55 )
+frame = 1
 playing = true
 
 [node name="LisetArea" type="Area2D" parent="Liset"]
@@ -1286,7 +1317,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Liset/LisetArea"]
-shape = SubResource( 31 )
+shape = SubResource( 56 )
 [connection signal="finished" from="DistortionWorldIntro" to="." method="_on_DistortionWorldIntro_finished"]
 [connection signal="finished" from="BossfightIntro" to="." method="_on_BossfightIntro_finished"]
 [connection signal="finished" from="CanvasLayer/Lowtus/Intro" to="." method="_on_Intro_finished"]

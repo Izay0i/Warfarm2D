@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/We have located the enemy's planetary communication tower. Capture the tower and remain in control long enough to decode incoming messages..ogg-d991c08b2a87ee453ce46fb4c43fc37b.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/voicelines/We have located the enemy's planetary communication tower. Capture the tower and remain in control long enough to decode incoming messages..ogg"
+dest_files=[ "res://.import/We have located the enemy's planetary communication tower. Capture the tower and remain in control long enough to decode incoming messages..ogg-d991c08b2a87ee453ce46fb4c43fc37b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

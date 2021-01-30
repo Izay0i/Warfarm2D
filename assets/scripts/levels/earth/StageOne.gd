@@ -130,7 +130,8 @@ func _on_Intro_finished():
 	lowtus.visible = false
 
 func _on_Ending_finished():
-	Global.tutorial_finished = true
+	if Global.levels_unlocked == 1:
+		Global.levels_unlocked = 2
 	Global.spawn_point = Vector2(-1, -1)
 	Global.save_config()
 

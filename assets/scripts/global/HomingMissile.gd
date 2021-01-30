@@ -48,7 +48,7 @@ func _physics_process(delta):
 	position += velocity * delta
 
 func _on_HomingMissile_body_entered(body):
-	if body.name == "Excalibur":
+	if body.name == "Excalibur" || body.name == "Console":
 		_explode()
 
 func _on_Timer_timeout():

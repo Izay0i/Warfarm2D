@@ -4,7 +4,7 @@ const UNIT_SIZE = 64
 const FILE_PATH = "user://settings.cfg"
 
 var music_on : bool = true
-var tutorial_finished : bool = false
+var levels_unlocked : int = 1
 #path to stage, not stage name
 var current_stage : String
 var spawn_point : Vector2 = Vector2(-1, -1)
@@ -14,7 +14,7 @@ func save_config():
 
 	var cfg_file = ConfigFile.new()
 	cfg_file.set_value("Settings", "music_on", music_on)
-	cfg_file.set_value("Settings", "tutorial_finished", tutorial_finished)
+	cfg_file.set_value("Settings", "levels_unlocked", levels_unlocked)
 	cfg_file.set_value("Settings", "current_stage", current_stage)
 	cfg_file.set_value("Settings", "spawn_point", spawn_point)
 
@@ -35,18 +35,9 @@ func load_config():
 		print("Settings found")
 
 		music_on = cfg_file.get_value("Settings", "music_on")
-		tutorial_finished = cfg_file.get_value("Settings", "tutorial_finished")
+		levels_unlocked = cfg_file.get_value("Settings", "levels_unlocked")
 		current_stage = cfg_file.get_value("Settings", "current_stage")
 		spawn_point = cfg_file.get_value("Settings", "spawn_point")
-
-#Never used
-func update_config(music, tutorial, stage_path, pos):
-	print("Updating values to config file")
-
-	music_on = music
-	tutorial_finished = tutorial
-	current_stage = stage_path
-	spawn_point = pos
 
 func _ready():
 	load_config()

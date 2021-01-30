@@ -23,7 +23,7 @@ var health = 300
 var velocity = Vector2.ZERO
 var normal = -1
 var is_enemy_spotted = false
-var active = false
+var active = true
 
 func get_class():
 	return "GrineerLancer"
@@ -58,10 +58,7 @@ func _handle_status():
 
 func _handle_movement():
 	if health > 0:
-		if is_enemy_spotted == false:
-			speed_mod = 1.0
-		else:
-			speed_mod = 0.7
+		if is_enemy_spotted:
 			if timer.is_stopped():
 				_shoot_bullet(normal)
 				_start_timer()
@@ -86,12 +83,18 @@ func _physics_process(_delta):
 		_handle_movement()
 
 func _on_DetectionArea_body_entered(body):
-	if body.name == "Excalibur":
+	if body.name == "Excalibur" || body.name == "Console":
 		is_enemy_spotted = true
 
+		if body.name == "Console":
+			speed_mod = 0
+		else:
+			speed_mod = 0.7
+
 func _on_DetectionArea_body_exited(body):
-	if body.name == "Excalibur":
+	if body.name == "Excalibur" || body.name == "Console":
 		is_enemy_spotted = false
+		speed_mod = 1.0
 
 func _on_Timer_timeout():
 	timer.one_shot = false
@@ -121,7 +124,9 @@ func _on_DeathTimer_timeout():
 	queue_free()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	active = true
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+		active = true
 
 func _on_VisibilityNotifier2D_screen_exited():
-	active = false
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+		active = false
