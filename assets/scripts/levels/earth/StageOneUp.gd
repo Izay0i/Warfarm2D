@@ -87,10 +87,6 @@ func _on_ObjectiveTimer_timeout():
 	blue_gate.queue_free()
 	_play_ending()
 
-	for enemy in self.get_children():
-		if enemy.get_class() == "GrineerLancer" || enemy.get_class() == "GrineerBombard":
-			enemy.queue_free()
-
 func _on_LisetArea_body_entered(body):
 	if body.name == "Excalibur":
 		if get_tree().change_scene("res://assets/scenes/levels/earth/StageTwo.tscn") != OK:
@@ -108,6 +104,10 @@ func _on_Ending_finished():
 
 	if bg_ambience.playing:
 		bg_ambience.stream_paused = true
+
+	for enemy in self.get_children():
+		if enemy.get_class() == "GrineerLancer" || enemy.get_class() == "GrineerBombard":
+			enemy.queue_free()
 
 func _on_TowerSpotted_finished():
 	lowtus.visible = false

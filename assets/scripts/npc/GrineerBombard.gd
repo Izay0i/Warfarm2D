@@ -25,7 +25,7 @@ var health = 500
 var velocity = Vector2.ZERO
 var normal = -1
 var is_enemy_spotted = false
-var active = true
+var active = false
 
 func get_class():
 	return "GrineerBombard"
@@ -90,6 +90,9 @@ func _handle_movement():
 func _ready():
 	_start_timer()
 
+	if get_parent().filename == "res://assets/scenes/levels/earth/StageOneUp.tscn":
+		active = true
+
 func _physics_process(_delta):
 	if active:
 		if !target:
@@ -143,9 +146,9 @@ func _on_DeathTimer_timeout():
 	queue_free()
 
 func _on_VisibilityNotifier2D_screen_entered():
-	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageOneUp.tscn":
 		active = true
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if get_parent().filename != "res://assets/scenes/levels/earth/StageTwo.tscn":
+	if get_parent().filename != "res://assets/scenes/levels/earth/StageOneUp.tscn":
 		active = false
